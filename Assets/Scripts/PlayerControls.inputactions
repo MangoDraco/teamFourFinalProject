@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Gameplay",
+            "name": "Player",
             "id": "9f818429-f769-4587-8ea0-9d653709e358",
             "actions": [
                 {
@@ -18,6 +18,24 @@
                     "name": "Move",
                     "type": "PassThrough",
                     "id": "64d8c58f-cd5b-4b03-aa01-017a03ed2eea",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump(xbox)",
+                    "type": "Button",
+                    "id": "703a1825-928a-4892-b076-fb8a2f58df47",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Move(xbox)",
+                    "type": "PassThrough",
+                    "id": "2e2930c9-1eba-4f69-9bdb-868fd74cbe67",
                     "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
@@ -112,6 +130,72 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "fa4076e2-15be-4700-ad3d-029e426d05f1",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Jump(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "3D Vector",
+                    "id": "6f7181ee-ebbb-415a-8265-45f818a9ec2c",
+                    "path": "3DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move(xbox)",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "ba2ceb85-8117-4e1c-bc47-1a1ecfc15649",
+                    "path": "<XInputController>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Move(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "889e3209-b8dd-4ebf-8982-2221cef4c175",
+                    "path": "<XInputController>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "forward",
+                    "id": "dbcc4c7b-bebd-40d1-9e67-d450cb27fafa",
+                    "path": "<XInputController>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Move(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "backward",
+                    "id": "f2354a4f-d2f6-4e42-b8ab-ef7aa280be82",
+                    "path": "<XInputController>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Move(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
@@ -123,6 +207,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Xbox",
+            "bindingGroup": "Xbox",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
                     "isOptional": false,
                     "isOR": false
                 }
