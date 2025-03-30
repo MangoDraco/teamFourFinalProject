@@ -313,8 +313,15 @@ MonoBehaviour:
   rigidBody: {fileID: 141496567}
   walkSpeed: 0
   runSpeed: 0
-  move: {fileID: -5402915691501675252, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
-  interact: {fileID: -3445005557130349946, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  moveKeyboard: {fileID: -5402915691501675252, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  interactKeyboard: {fileID: -3445005557130349946, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  backKeyboard: {fileID: -85393802242813227, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  powerupKeyboard: {fileID: -4908790522306312305, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  moveController: {fileID: -1299498794364573871, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  interactController: {fileID: -6169271799551281441, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  jumpController: {fileID: -8216611197968349687, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  backController: {fileID: 8834747538539894188, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
+  powerupController: {fileID: -1380184649844045203, guid: b396c05356f373f4e808eb7411b789aa, type: 3}
 --- !u!114 &141496569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +349,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!136 &141496570

@@ -24,9 +24,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump(xbox)",
+                    "name": "Powerup",
                     "type": "Button",
-                    "id": "703a1825-928a-4892-b076-fb8a2f58df47",
+                    "id": "071c5c1e-44eb-4eb5-a3d0-924b9593ef22",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "dcd8867f-9909-4264-ae56-15957dc4bd5d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -37,6 +46,42 @@
                     "type": "PassThrough",
                     "id": "2e2930c9-1eba-4f69-9bdb-868fd74cbe67",
                     "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump(xbox)",
+                    "type": "Button",
+                    "id": "703a1825-928a-4892-b076-fb8a2f58df47",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact(xbox)",
+                    "type": "Button",
+                    "id": "9c47cbeb-bc4e-4f0b-bb9b-fa9d6365072f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back(xbox)",
+                    "type": "Button",
+                    "id": "dbfbc9a3-f8d7-4444-bba7-41cdb3b31c9d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Powerup(xbox)",
+                    "type": "Button",
+                    "id": "0b410264-9e4b-421a-b24e-bc906c8aede7",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -170,7 +215,7 @@
                     "path": "<XInputController>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Xbox",
                     "action": "Move(xbox)",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -196,6 +241,61 @@
                     "action": "Move(xbox)",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "447c2757-64ed-4fa7-a661-d81838b88434",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Interact(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1e7e503-447e-42ca-9af2-374122b20f0d",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Back(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6035377-44e5-4414-be2e-7d026249edd2",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Powerup(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cdb40893-9b4f-4a6f-86df-4435f795f95a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Powerup",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df6fb0ef-cb4f-4693-a2ea-702d1a63c6a0",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

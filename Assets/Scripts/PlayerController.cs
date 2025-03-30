@@ -11,12 +11,20 @@ public class PlayerController : MonoBehaviour
     public float runSpeed;
 
     private Vector3 _moveDirection;
-    public InputActionReference move;
-    public InputActionReference interact;
+    public InputActionReference moveKeyboard;
+    public InputActionReference interactKeyboard;
+    public InputActionReference backKeyboard;
+    public InputActionReference powerupKeyboard;
+
+    public InputActionReference moveController;
+    public InputActionReference interactController;
+    public InputActionReference jumpController;
+    public InputActionReference backController;
+    public InputActionReference powerupController;
 
     private void Update()
     {
-        _moveDirection = move.action.ReadValue<Vector3>();
+        _moveDirection = moveKeyboard.action.ReadValue<Vector3>();
     }
 
     private void FixedUpdate()
@@ -26,12 +34,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        interact.action.started += Interact;
+        interactKeyboard.action.started += Interact;
+        interactController.action.started += Interact;
     }
 
     private void OnDisable()
     {
-        interact.action.started -= Interact;
+        interactKeyboard.action.started -= Interact;
+        interactController.action.started -= Interact;
     }
 
     private void Interact(InputAction.CallbackContext obj)
