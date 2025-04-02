@@ -6,19 +6,28 @@
             "id": "9f818429-f769-4587-8ea0-9d653709e358",
             "actions": [
                 {
-                    "name": "Interact",
+                    "name": "Move",
+                    "type": "PassThrough",
+                    "id": "64d8c58f-cd5b-4b03-aa01-017a03ed2eea",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "54e428e8-3dda-465c-81f8-2073f745367f",
+                    "id": "dada5e45-741f-4ddc-a9fe-a60342ce8877",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Move",
-                    "type": "PassThrough",
-                    "id": "64d8c58f-cd5b-4b03-aa01-017a03ed2eea",
-                    "expectedControlType": "Vector3",
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "54e428e8-3dda-465c-81f8-2073f745367f",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -45,7 +54,7 @@
                     "name": "Move(xbox)",
                     "type": "PassThrough",
                     "id": "2e2930c9-1eba-4f69-9bdb-868fd74cbe67",
-                    "expectedControlType": "Vector3",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -101,83 +110,6 @@
                 },
                 {
                     "name": "",
-                    "id": "353f2b65-32fa-410e-ae4b-c7f8c53d66d3",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "3D Vector",
-                    "id": "54936c49-eaac-475a-9e8c-fcbc31d88b4e",
-                    "path": "3DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "00c41313-dab3-4f6c-8c67-8c5614d6be57",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "f90cd8e6-1506-4114-a46a-95ff58e141dd",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "24488dce-b90f-4011-b4ba-26fc28339e01",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "forward",
-                    "id": "982afb7b-0d22-401e-a1e5-250c1ad3a598",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "backward",
-                    "id": "f167d881-40d7-490b-9404-7ee02ff984f9",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
                     "id": "fa4076e2-15be-4700-ad3d-029e426d05f1",
                     "path": "<XInputController>/buttonSouth",
                     "interactions": "",
@@ -186,61 +118,6 @@
                     "action": "Jump(xbox)",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "3D Vector",
-                    "id": "6f7181ee-ebbb-415a-8265-45f818a9ec2c",
-                    "path": "3DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move(xbox)",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "left",
-                    "id": "ba2ceb85-8117-4e1c-bc47-1a1ecfc15649",
-                    "path": "<XInputController>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Xbox",
-                    "action": "Move(xbox)",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "889e3209-b8dd-4ebf-8982-2221cef4c175",
-                    "path": "<XInputController>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Xbox",
-                    "action": "Move(xbox)",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "forward",
-                    "id": "dbcc4c7b-bebd-40d1-9e67-d450cb27fafa",
-                    "path": "<XInputController>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Xbox",
-                    "action": "Move(xbox)",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "backward",
-                    "id": "f2354a4f-d2f6-4e42-b8ab-ef7aa280be82",
-                    "path": "<XInputController>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Xbox",
-                    "action": "Move(xbox)",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -289,11 +166,132 @@
                 {
                     "name": "",
                     "id": "df6fb0ef-cb4f-4693-a2ea-702d1a63c6a0",
-                    "path": "<Keyboard>/backspace",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "e5b4decc-9b6a-4b92-92ae-ef960c198362",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "e9f51bbd-fd5c-47f4-815f-541441004661",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "32a63c35-82d4-4350-aea4-af462ab89a06",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "b15f7692-24cd-4263-a26d-950734b7b8d2",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "2570e751-3be8-4242-a042-b1bda2cf49d5",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "509bf7aa-462c-4a12-8fae-ae269a0ef313",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move(xbox)",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "7f6221b2-527b-44fd-aca0-1a2d1834aaec",
+                    "path": "<XInputController>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Move(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "d562863e-348c-4594-9143-cb2e45f0534f",
+                    "path": "<XInputController>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Move(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "ae4f1798-eb4f-43ee-8531-b41a68ac7971",
+                    "path": "<XInputController>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Move(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "51f4a94c-57e7-4574-b664-db69e4ac445e",
+                    "path": "<XInputController>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Xbox",
+                    "action": "Move(xbox)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "95242b9c-065f-4da0-980c-f65a09d2f865",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
