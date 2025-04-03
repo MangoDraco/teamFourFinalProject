@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rigidBody;
+    Vector3 defaultScale;
+    public TextMeshProUGUI lifeText;
+    public TextMeshProUGUI hpText;
+    
+
+    public int livesCount = 4;
+    public int maxHealth = 4;
+    public int health;
 
     public float walkSpeed = 5f; //Walking speed
     public float runSpeed = 8f; //Running speed
@@ -37,13 +47,22 @@ public class PlayerController : MonoBehaviour
     public InputActionReference powerupController;
 
     //Powerup system
-    public enum PowerupType { None, CardPlatform}
+    public enum PowerupType { None, CardPlatform, HatBlink}
     private PowerupType currentPowerup = PowerupType.None;
 
     public GameObject cardPlatformPrefab; //Assign card prefab in inspector!
+    public GameObject disappearance; //Assign effect prefab in inspector
+    public GameObject reappearance; //Assign effect prefab in inspector
     public Transform throwPoint; //Empty GameObject at the throw position
     public float throwForce = 5f;
 
+    private void Start()
+    {
+        lifeText.text += livesCount.ToString();
+        health = maxHealth;
+        hpText.text += health.ToString();
+
+    }
     private void Update()
     {
         DetectInputDevice();
@@ -143,6 +162,10 @@ public class PlayerController : MonoBehaviour
                 ThrowCardPlatform();
                 break;
 
+            case PowerupType.HatBlink:
+                HatBlink();
+                break;
+
             //Future powerups here
             default:
                 Debug.Log("Unknown powerup");
@@ -151,7 +174,28 @@ public class PlayerController : MonoBehaviour
 
         currentPowerup = PowerupType.None;
     }
+    
+    private void HatBlink()
+    {
+        float dashTimer = .75f;
+        GameObject poofOut = Instantiate(disappearance, transform.position, Quaternion.identity);
+        Debug.Log("Disappear");
+        //animate the character shrinking down to barely anything (make it instant) and let it last .75 seconds
+        dashTimer -= Time.deltaTime;
+        while (dashTimer >= 0.0f)
+        {
+            transform.Translate(Vector3.forward * (2 * runSpeed) * Time.deltaTime);
+            Debug.Log("Blink");
+        }
+        Destroy(poofOut);
+        GameObject poofIn = Instantiate(reappearance, transform.position, Quaternion.identity);
+        Debug.Log("Reappear");
+        //animate them coming back
+        Destroy(poofIn);
 
+        currentPowerup = PowerupType.None;
+        Debug.Log("Hat Blink complete");
+    }
     private void ThrowCardPlatform()
     {
         GameObject card = Instantiate(cardPlatformPrefab, throwPoint.position, Quaternion.identity);
