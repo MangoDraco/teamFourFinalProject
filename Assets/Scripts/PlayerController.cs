@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class PlayerController : MonoBehaviour
     Vector3 defaultScale;
     public TextMeshProUGUI lifeText;
     public TextMeshProUGUI hpText;
-    
+
+    public CinemachineVirtualCamera virtualCamera;
+    public float zoomSpeed = 5f;
 
     public int livesCount = 4;
     public int maxHealth = 4;
@@ -58,17 +61,47 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        lifeText.text += livesCount.ToString();
+        /*lifeText.text += livesCount.ToString();
         health = maxHealth;
-        hpText.text += health.ToString();
+        hpText.text += health.ToString();*/
 
     }
     private void Update()
     {
         DetectInputDevice();
 
+        if (moveKeyboard == null)
+        {
+            Debug.LogError("moveKeyboard is not assigned!");
+        }
+
+        if (moveController == null)
+        {
+            Debug.LogError("moveController is not assigned!");
+        }
+
+        if (rigidBody == null)
+        {
+            Debug.LogError("rigidBody is not assigned!");
+        }
+
         Vector2 moveInput = _isUsingKeyboard ? moveKeyboard.action.ReadValue<Vector2>() : moveController.action.ReadValue<Vector2>();
         _moveDirection = moveInput;
+        
+        //Cinemachine Camera
+        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
+        CinemachineFramingTransposer framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        framingTransposer.m_CameraDistance += zoomInput * zoomSpeed;
+
+        float speed = walkSpeed;
+        if (moveKeyboard.action.ReadValue<Vector2>().magnitude > 0 && Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = runSpeed;
+        }
+
+        _moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+        _moveDirection.Normalize();
+        _moveDirection *= speed;
     }
 
     private void FixedUpdate()
