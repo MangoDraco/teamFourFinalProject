@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
-public class PlayerController : MonoBehaviour
+public class Testing : MonoBehaviour
 {
     public Rigidbody rigidBody;
     Vector3 defaultScale;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     //Tab in order to bring up in-game menu
     public GameObject menu; //Assign this in the inspector!
-    private bool isPaused = false; 
+    private bool isPaused = false;
 
     //Keyboard inputs
     public InputActionReference moveKeyboard;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     public InputActionReference powerupController;
 
     //Powerup system
-    public enum PowerupType { None, CardPlatform, HatBlink}
+    public enum PowerupType { None, CardPlatform, HatBlink }
     private PowerupType currentPowerup = PowerupType.None;
 
     public GameObject cardPlatformPrefab; //Assign card prefab in inspector!
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 moveInput = _isUsingKeyboard ? moveKeyboard.action.ReadValue<Vector2>() : moveController.action.ReadValue<Vector2>();
         _moveDirection = moveInput;
-        
+
         //Cinemachine Camera
         float zoomInput = Input.GetAxis("Mouse ScrollWheel");
         CinemachineFramingTransposer framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
 
         currentPowerup = PowerupType.None;
     }
-    
+
     private void HatBlink()
     {
         float dashTimer = .75f;
@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject card = Instantiate(cardPlatformPrefab, throwPoint.position, Quaternion.identity);
         Rigidbody cardRigidbody = card.GetComponent<Rigidbody>();
-        if (cardRigidbody != null )
+        if (cardRigidbody != null)
         {
             cardRigidbody.AddForce(transform.forward * throwForce, ForceMode.Impulse);
         }
