@@ -1094,7 +1094,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(PlayerActions set) => set.Get();
         public void AddCallbacks(IPlayerActions instance)
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
