@@ -10,5 +10,5 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Self] CharacterController controller;
     [SerializeField, Self] Animator animator;
     [SerializeField, Anywhere] CinemachineFreeLook freeLookVCam;
-    SerializeField, Anywhere] InputReader input;
+    [SerializeField, Anywhere] InputReader input;
 }
