@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using System;
 
 public class Testing : MonoBehaviour
 {
@@ -48,6 +49,9 @@ public class Testing : MonoBehaviour
     public InputActionReference jumpController;
     public InputActionReference backController;
     public InputActionReference powerupController;
+
+    public bool isInvincible;
+    public float invinciTimer = .75f;
 
     //Powerup system
     public enum PowerupType { None, CardPlatform, HatBlink }
@@ -213,8 +217,10 @@ public class Testing : MonoBehaviour
         float dashTimer = .75f;
         GameObject poofOut = Instantiate(disappearance, transform.position, Quaternion.identity);
         Debug.Log("Disappear");
-        //animate the character shrinking down to barely anything (make it instant) and let it last .75 seconds
+        GameObject.Find("Player").transform.localScale = new Vector3(0, 0, 0);
+        isInvincible = true;
         dashTimer -= Time.deltaTime;
+        invinciTimer -= Time.deltaTime;
         while (dashTimer >= 0.0f)
         {
             transform.Translate(Vector3.forward * (2 * runSpeed) * Time.deltaTime);
@@ -223,8 +229,9 @@ public class Testing : MonoBehaviour
         Destroy(poofOut);
         GameObject poofIn = Instantiate(reappearance, transform.position, Quaternion.identity);
         Debug.Log("Reappear");
-        //animate them coming back
+        GameObject.Find("Player").transform.localScale = new Vector3(1, 1, 1);
         Destroy(poofIn);
+        isInvincible = false;
 
         currentPowerup = PowerupType.None;
         Debug.Log("Hat Blink complete");
