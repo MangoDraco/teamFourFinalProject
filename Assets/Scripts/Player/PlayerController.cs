@@ -6,9 +6,9 @@ using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("References")]
+    /*[Header("References")]
     [SerializeField, Self] CharacterController controller;
     [SerializeField, Self] Animator animator;
     [SerializeField, Anywhere] CinemachineFreeLook freeLookVCam;
-    SerializeField, Anywhere] InputReader input;
+    SerializeField, Anywhere] InputReader input;*/
 }
