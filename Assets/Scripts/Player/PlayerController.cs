@@ -97,11 +97,4 @@ namespace teamFourFinalProject
             currentSpeed = Mathf.SmoothDamp(current: currentSpeed, target: value, ref velocity, smoothTime);
         }
     }
-
-    [Header("References")]
-    [SerializeField, Self] CharacterController controller;
-    [SerializeField, Self] Animator animator;
-    [SerializeField, Anywhere] CinemachineFreeLook freeLookVCam;
-    [SerializeField, Anywhere] InputReader input;
-
 }
