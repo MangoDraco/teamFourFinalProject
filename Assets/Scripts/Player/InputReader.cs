@@ -28,6 +28,10 @@ namespace teamFourFinalProject
                 inputActions = new PlayerInputActions();
                 inputActions.Player.SetCallbacks(instance: this);
             }
+        }
+
+        public void EnablePlayerActions()
+        {
             inputActions.Enable();
         }
 

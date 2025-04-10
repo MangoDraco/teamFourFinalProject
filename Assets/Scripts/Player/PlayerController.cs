@@ -21,6 +21,9 @@ namespace teamFourFinalProject
         [SerializeField] float rotationSpeed = 15f;
         [SerializeField] float smoothTime = 0.2f;
 
+        //Animator
+        static readonly int Speed = Animator.StringToHash(name: "Speed");
+
         float currentSpeed;
         float velocity;
 
@@ -40,10 +43,15 @@ namespace teamFourFinalProject
             freelookVCam.OnTargetObjectWarped(transform, positionDelta: transform.position - freelookVCam.transform.position - Vector3.forward);
         }
 
+        private void Start()
+        {
+            input.EnablePlayerActions();
+        }
+
         private void Update()
         {
             HandleMovement();
-            //UpdateAnimator();
+            HandleAnimator();
         }
 
         void HandleMovement()
@@ -61,6 +69,11 @@ namespace teamFourFinalProject
             {
                 SmoothSpeed(ZeroF);
             }
+        }
+
+        void HandleAnimator()
+        {
+            animator.SetFloat(id: Speed, currentSpeed);
         }
 
         void HandleCharacterController(Vector3 adjustedDirection)
