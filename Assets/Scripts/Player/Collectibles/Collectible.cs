@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
+namespace teamFourFinalProject
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Collectible : Entity
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
