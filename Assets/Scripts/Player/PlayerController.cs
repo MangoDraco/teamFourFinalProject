@@ -76,7 +76,7 @@ namespace teamFourFinalProject
             input.Jump += OnJump;
         }
 
-        void OnDisbale()
+        void OnDisable()
         {
             input.Jump -= OnJump;
         }
