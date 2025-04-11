@@ -12,8 +12,8 @@ namespace teamFourFinalProject
     public class PlayerController : ValidatedMonoBehaviour
     {
         [Header("References")]
-        [SerializeField, Self] CharacterController controller;
         [SerializeField, Self] Animator animator;
+        [SerializeField, Self] Rigidbody rb;
         [SerializeField, Anywhere] CinemachineFreeLook freelookVCam;
         [SerializeField, Anywhere] InputReader input;
 
@@ -42,6 +42,8 @@ namespace teamFourFinalProject
 
             //Invoke event when observed transform is teleported, adjusting freeLookVCam's position accordingly
             freelookVCam.OnTargetObjectWarped(transform, positionDelta: transform.position - freelookVCam.transform.position - Vector3.forward);
+
+            rb.freezeRotation = true;
         }
 
         private void Start()
@@ -51,24 +53,33 @@ namespace teamFourFinalProject
 
         private void Update()
         {
-            HandleMovement();
+            movement = new Vector3(input.Direction.x, y: 0f, z: input.Direction.y);
+
             HandleAnimator();
+        }
+
+        private void FixedUpdate()
+        {
+            //HandleJump();
+            HandleMovement();
         }
 
         void HandleMovement()
         {
-            var movementDirection = new Vector3(input.Direction.x, y: 0f, z: input.Direction.y).normalized;
             //Rotate movement direction to match camera rotation
-            var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movementDirection;
+            var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
             if (adjustedDirection.magnitude > ZeroF)
             {
                 HandleRotation(adjustedDirection);
-                HandleCharacterController(adjustedDirection);
+                HandleHorizontalMovement(adjustedDirection);
                 SmoothSpeed(adjustedDirection.magnitude);
             }
             else
             {
                 SmoothSpeed(ZeroF);
+
+                //Reset horizontal velocity
+                rb.velocity = new Vector3(x: ZeroF, rb.velocity.y, z: ZeroF);
             }
         }
 
@@ -77,11 +88,11 @@ namespace teamFourFinalProject
             animator.SetFloat(id: Speed, currentSpeed);
         }
 
-        void HandleCharacterController(Vector3 adjustedDirection)
+        void HandleHorizontalMovement(Vector3 adjustedDirection)
         {
             //Move the player
-            var adjustedMovement = adjustedDirection * (moveSpeed * Time.deltaTime);
-            controller.Move(adjustedMovement);
+            Vector3 velocity = adjustedDirection * moveSpeed * Time.fixedDeltaTime;
+            rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
         }
 
         void HandleRotation(Vector3 adjustedDirection)
