@@ -21,6 +21,7 @@ public class FlyingEnemy : MonoBehaviour
         if(CanShoot == true)
         {
             ShootAtPlayer();
+            FirstShotDelay();
         }
     }
 
@@ -42,21 +43,29 @@ public class FlyingEnemy : MonoBehaviour
         }
     }
 
+    public void FirstShotDelay()
+    {
+        delay -= Time.deltaTime;
+        delay = 2;
+    }
+
     void ShootAtPlayer()
     {
-        delay = 2;
-        bulletTime -= Time.deltaTime;
+        bulletTime -= Time.deltaTime; //decrease bullet travel time
 
-        if(bulletTime > 0 + delay)
+        if(bulletTime > 0)
         {
             return;
         }
 
-        bulletTime = timer;
+        bulletTime = timer; //bullets lifetime
 
-        GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
+        GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject; //spawning the projectile
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-        bulletRig.AddForce(bulletRig.transform.forward * enemySpeed);
+        if (delay > 0)
+        {
+            bulletRig.AddForce(bulletRig.transform.forward * enemySpeed); // shooting the projectile
+        }
         Destroy(bulletObj, 5f);
 ;    }
 
