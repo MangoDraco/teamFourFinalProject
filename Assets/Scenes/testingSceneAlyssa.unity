@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 100341568}
   - component: {fileID: 100341567}
   - component: {fileID: 100341566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Moving Platform
   m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 1640992763}
   - component: {fileID: 1640992762}
   - component: {fileID: 1640992761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Moving Platform (1)
   m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
