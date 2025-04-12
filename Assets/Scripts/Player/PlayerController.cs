@@ -244,6 +244,7 @@ namespace teamFourFinalProject
             //Move the player
             Vector3 velocity = adjustedDirection * moveSpeed * Time.fixedDeltaTime;
             rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
+            Debug.Log(velocity);
         }
 
         void HandleRotation(Vector3 adjustedDirection)
