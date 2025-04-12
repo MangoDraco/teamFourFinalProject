@@ -787,6 +787,10 @@ PrefabInstance:
       propertyPath: freelookVCam
       value: 
       objectReference: {fileID: 90431502}
+    - target: {fileID: 6208707175569619840, guid: b383226a16de43942ab88ad74588aef3, type: 3}
+      propertyPath: groundDistance
+      value: 0.92
+      objectReference: {fileID: 0}
     - target: {fileID: 7550004905584174480, guid: b383226a16de43942ab88ad74588aef3, type: 3}
       propertyPath: m_Name
       value: Player

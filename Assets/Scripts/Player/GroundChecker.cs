@@ -14,7 +14,23 @@ namespace teamFourFinalProject
 
         private void Update()
         {
-            isGrounded = Physics.SphereCast(origin:transform.position, radius:groundDistance, direction:Vector3.down, out _, groundDistance, (int)groundLayers);
+            isGrounded = Physics.SphereCast(origin: transform.position, radius: groundDistance, direction: Vector3.down, out _, groundDistance, (int)groundLayers);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Vector3 origin = transform.position;
+            Vector3 direction = transform.forward;
+            float radius = 0.5f;
+            float maxDistance = 10f;
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(origin, radius);
+            Gizmos.DrawWireSphere(origin + direction * maxDistance, radius);
+            Gizmos.DrawLine(origin + Vector3.up * radius, origin + direction * maxDistance + Vector3.up * radius);
+            Gizmos.DrawLine(origin - Vector3.up * radius, origin + direction * maxDistance - Vector3.up * radius);
+            Gizmos.DrawLine(origin + Vector3.right * radius, origin + direction * maxDistance + Vector3.right * radius);
+            Gizmos.DrawLine(origin - Vector3.right * radius, origin + direction * maxDistance - Vector3.right * radius);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Apple;
 
-public class PatrollingEnemy : MonoBehaviour, iStompable
+public class PatrollingEnemy : MonoBehaviour, IStompable
 {
 
     private Rigidbody rB;   
@@ -62,12 +62,12 @@ public class PatrollingEnemy : MonoBehaviour, iStompable
     }
 
     //functions from iStompable
-    void Die()
+    void IStompable.Die()
     {
         Destroy(gameObject);
     }
 
-    void OnStomped()
+    void IStompable.OnStomped()
     {
         //instantiate vfx (when we add that in)
         //PlaySoundOnce(stomped);
