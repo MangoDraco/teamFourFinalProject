@@ -6,6 +6,7 @@ public class HealthManager : MonoBehaviour
 {
     public int maxHealth;
     public int curHealth;
+    public GameObject playerPrefab; //add the player in :3
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +38,11 @@ public class HealthManager : MonoBehaviour
     {
         Destroy(gameObject);
         Debug.Log("You have died");
+    }
+
+    void Respawn()
+    {
+        Instantiate(playerPrefab, CheckpointSystem.respawnPoint.position, Quaternion.identity);
     }
 
     bool Heal()
