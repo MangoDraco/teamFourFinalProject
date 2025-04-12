@@ -37,6 +37,11 @@ namespace teamFourFinalProject
         private bool canDoubleJump = false;
         private bool doubleJumpRequested = false;
 
+        [Header("Attack Settings")]
+        [SerializeField] float attackCooldown = 0.5f;
+        [SerializeField] float attackDistance = 1f;
+        [SerializeField] int attackDamage = 10;
+
         //Animator
         static readonly int Speed = Animator.StringToHash(name: "Speed");
 
@@ -53,6 +58,7 @@ namespace teamFourFinalProject
         List<JumpTimer> timers;
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
+        CountdownTimer attackTimer;
 
         private void Awake()
         {
@@ -109,6 +115,7 @@ namespace teamFourFinalProject
             }
         }
 
+        //Left just in case we want to revert to original
         /*void OnJump(bool performed)
         {
             Debug.Log($"Jump Input: {performed}, JumpTimerRunning: {jumpTimer.isRunning}, CooldownRunning: {jumpCooldownTimer.isRunning}, Grounded: {groundChecker.isGrounded}");
