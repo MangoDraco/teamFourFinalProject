@@ -19,7 +19,7 @@ public class CheckpointSystem : MonoBehaviour
         {
             for (int i = 0; i < checkpoints.Length; i++)
             {
-                if (checkpoints[i].position == respawnPoint.position)
+                if (checkpoints[i].position == other.gameObject.transform.position)
                 {
                     respawnPoint = checkpoints[i];
                 }
