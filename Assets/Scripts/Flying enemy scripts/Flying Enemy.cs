@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingEnemy : MonoBehaviour //IStompable
+public class FlyingEnemy : MonoBehaviour, IStompable
 {
     public Transform player;
 
@@ -72,6 +72,16 @@ public class FlyingEnemy : MonoBehaviour //IStompable
             bulletRig.AddForce(bulletRig.transform.forward * enemySpeed);
         }
         Destroy(bulletObj, 5f);
-;    }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    public void OnStomped()
+    {
+
+    }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SeekingEnemy : MonoBehaviour //IStompable
+public class SeekingEnemy : MonoBehaviour, IStompable
 {
     public NavMeshAgent agent;
     public float range;
@@ -44,5 +44,14 @@ public class SeekingEnemy : MonoBehaviour //IStompable
 
     }
 
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    public void OnStomped()
+    {
+
+    }
 
 }
