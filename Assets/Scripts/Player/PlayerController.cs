@@ -12,7 +12,8 @@ namespace teamFourFinalProject
     public class PlayerController : ValidatedMonoBehaviour
     {
         [Header("References")]
-        [SerializeField, Self] Animator animator;
+        //For some reason Animator is causing issues with jump. Has been omitted for now
+        //[SerializeField, Self] Animator animator;
         [SerializeField, Self] Rigidbody rb;
         [SerializeField, Self] GroundChecker groundChecker;
         [SerializeField, Anywhere] CinemachineFreeLook freelookVCam;
@@ -83,13 +84,16 @@ namespace teamFourFinalProject
 
         void OnJump(bool performed)
         {
+            Debug.Log($"Jump Input: {performed}, JumpTimerRunning: {jumpTimer.isRunning}, CooldownRunning: {jumpCooldownTimer.isRunning}, Grounded: {groundChecker.isGrounded}");
             if (performed && !jumpTimer.isRunning && !jumpCooldownTimer.isRunning && groundChecker.isGrounded)
             {
+                Debug.Log("Jump started!");
                 jumpTimer.Start();
             }
 
             else if (!performed && jumpTimer.isRunning)
             {
+                Debug.Log("Jump stopped early");
                 jumpTimer.Stop();
             }
         }
@@ -109,7 +113,7 @@ namespace teamFourFinalProject
         }
         void HandleAnimator()
         {
-            animator.SetFloat(id: Speed, currentSpeed);
+            //animator.SetFloat(id: Speed, currentSpeed);
         }
 
         void HandleTimers()
