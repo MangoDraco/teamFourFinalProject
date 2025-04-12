@@ -8,7 +8,7 @@ namespace teamFourFinalProject
     public class Health : MonoBehaviour
     {
         [SerializeField] int maxHealth = 100;
-        [SerializeField] FloatEventChannel playerHealthChannel;
+        //[SerializeField] FloatEventChannel playerHealthChannel; For event system
 
         int currentHealth;
 
@@ -32,10 +32,10 @@ namespace teamFourFinalProject
 
         void PublishHealthPercentage()
         {
-            if (playerHealthChannel != null)
+            /*if (playerHealthChannel != null)
             {
                 playerHealthChannel.Invoke(currentHealth / (float)maxHealth);
-            }
+            }*/
         }
     }
 }
