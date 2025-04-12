@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingEnemy : MonoBehaviour
+public class FlyingEnemy : MonoBehaviour //IStompable
 {
     public Transform player;
 
@@ -15,12 +15,17 @@ public class FlyingEnemy : MonoBehaviour
     public float enemySpeed;
     bool CanShoot;
 
+    public void Start()
+    {
+       
+    }
 
     private void Update()
     {
         if(CanShoot == true)
         {
             ShootAtPlayer();
+            FirstShotDelay();
         }
     }
 
@@ -42,6 +47,12 @@ public class FlyingEnemy : MonoBehaviour
         }
     }
 
+    public void FirstShotDelay()
+    {
+        delay -= Time.deltaTime;
+        delay = 2;
+    }
+
     void ShootAtPlayer()
     {
         delay = 2;
@@ -56,7 +67,10 @@ public class FlyingEnemy : MonoBehaviour
 
         GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-        bulletRig.AddForce(bulletRig.transform.forward * enemySpeed);
+        if (delay > 0)
+        {
+            bulletRig.AddForce(bulletRig.transform.forward * enemySpeed);
+        }
         Destroy(bulletObj, 5f);
 ;    }
 

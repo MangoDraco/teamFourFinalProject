@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SeekingEnemy : MonoBehaviour
+public class SeekingEnemy : MonoBehaviour //IStompable
 {
     public NavMeshAgent agent;
     public float range;
