@@ -34,13 +34,13 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    void Death()
+    public void Death()
     {
         Destroy(gameObject);
         Debug.Log("You have died");
     }
 
-    void Respawn()
+    public void Respawn()
     {
         Instantiate(playerPrefab, CheckpointSystem.respawnPoint.position, Quaternion.identity);
     }
