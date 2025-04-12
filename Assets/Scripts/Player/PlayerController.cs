@@ -37,10 +37,11 @@ namespace teamFourFinalProject
         private bool canDoubleJump = false;
         private bool doubleJumpRequested = false;
 
-        [Header("Attack Settings")]
+        //If making a different way to attack
+        /*[Header("Attack Settings")]
         [SerializeField] float attackCooldown = 0.5f;
         [SerializeField] float attackDistance = 1f;
-        [SerializeField] int attackDamage = 10;
+        [SerializeField] int attackDamage = 10;*/
 
         //Animator
         static readonly int Speed = Animator.StringToHash(name: "Speed");
