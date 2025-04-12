@@ -66,4 +66,13 @@ public class HealthManager : MonoBehaviour
 
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Deathplane")
+        {
+            Death();
+        }
+
+    }
 }
