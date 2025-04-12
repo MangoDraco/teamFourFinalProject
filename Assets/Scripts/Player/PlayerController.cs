@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using KBCore.Refs;
 using Unity.PlasticSCM.Editor.WebApi;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace teamFourFinalProject
@@ -28,8 +29,13 @@ namespace teamFourFinalProject
         [SerializeField] float jumpForce = 10f;
         [SerializeField] float jumpDuration = 0.5f;
         [SerializeField] float jumpCooldown = 0f;
-        [SerializeField] float jumpMaxHeight = 2f;
+        [SerializeField] float jumpMaxHeight = 5f;
         [SerializeField] float gravityMultiplier = 3f;
+        [SerializeField] int maxJumpCount = 2;
+        [SerializeField] float doubleJumpMultiplier = 2;
+        int currentJumpCount = 0;
+        private bool canDoubleJump = false;
+        private bool doubleJumpRequested = false;
 
         //Animator
         static readonly int Speed = Animator.StringToHash(name: "Speed");
@@ -84,19 +90,49 @@ namespace teamFourFinalProject
 
         void OnJump(bool performed)
         {
+            if (!performed) return;
+            
+            if (groundChecker.isGrounded)
+            {
+                jumpTimer.Start();
+                currentJumpCount = 1;
+                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+                canDoubleJump = true;
+            }
+
+            else if (canDoubleJump && currentJumpCount < maxJumpCount)
+            {
+                doubleJumpRequested = true;
+                currentJumpCount++;
+                canDoubleJump = false;
+                Debug.Log("Double jump");
+            }
+        }
+
+        /*void OnJump(bool performed)
+        {
             Debug.Log($"Jump Input: {performed}, JumpTimerRunning: {jumpTimer.isRunning}, CooldownRunning: {jumpCooldownTimer.isRunning}, Grounded: {groundChecker.isGrounded}");
             if (performed && !jumpTimer.isRunning && !jumpCooldownTimer.isRunning && groundChecker.isGrounded)
             {
                 Debug.Log("Jump started!");
                 jumpTimer.Start();
+                currentJumpCount++;
+                Debug.Log($"Jump {currentJumpCount} / {maxJumpCount}");
+                canDoubleJump = true;
             }
 
-            else if (!performed && jumpTimer.isRunning)
+            else if (!performed && jumpTimer.isRunning && canDoubleJump && currentJumpCount < maxJumpCount)
             {
                 Debug.Log("Jump stopped early");
                 jumpTimer.Stop();
+
+                float doubleJumpForce = jumpForce * doubleJumpMultiplier;
+                rb.velocity = new Vector3(rb.velocity.x, doubleJumpForce, rb.velocity.z);
+
+                currentJumpCount++;
+                canDoubleJump = false;
             }
-        }
+        }*/
 
         private void Update()
         {
@@ -126,11 +162,26 @@ namespace teamFourFinalProject
 
         void HandleJump()
         {
+            if (doubleJumpRequested)
+            {
+                float doubleJumpHeight = jumpMaxHeight * doubleJumpMultiplier;
+                float doubleJumpVelocity = Mathf.Sqrt(2 * doubleJumpHeight * Mathf.Abs(Physics.gravity.y));
+                //jumpVelocity = jumpForce * doubleJumpMultiplier;
+                jumpVelocity = doubleJumpVelocity;
+                doubleJumpRequested = false;
+            }
+
+            else if (!groundChecker.isGrounded)
+            {
+                jumpVelocity += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+            }
+
             //If not jumping and grounded, keep jump velocity at 0
             if (!jumpTimer.isRunning && groundChecker.isGrounded)
             {
                 jumpVelocity = ZeroF;
                 jumpTimer.Stop();
+                currentJumpCount = 0;
                 return;
             }
 
@@ -142,7 +193,7 @@ namespace teamFourFinalProject
                 if (jumpTimer.Progress > launchPoint)
                 {
                     //Calculate the velocity required to reach the jump height using physics equations v = sqrt(2gh) (height (h), gravity (g), velocity (v)
-                    jumpVelocity = Mathf.Sqrt(f: 2 * jumpMaxHeight * Mathf.Abs(Physics.gravity.y));
+                    jumpVelocity = Mathf.Sqrt(f: 2 * (jumpMaxHeight * doubleJumpMultiplier) * Mathf.Abs(Physics.gravity.y));
                 }
 
                 else
