@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9acce5aa5293d204d93f4b607b42950e, type: 3}
-  m_Name: HatBlink
+  m_Script: {fileID: 11500000, guid: 891602e815f21ce45a165999c9d082d2, type: 3}
+  m_Name: HatBlinkPowerup
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  score: 0
+  duration: 5

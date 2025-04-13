@@ -17,9 +17,9 @@ TagManager:
   - Target
   - Obstruction
   - Ground
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - HatBlink
   - 
   - 
   - 

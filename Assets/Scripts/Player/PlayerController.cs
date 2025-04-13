@@ -339,7 +339,12 @@ namespace teamFourFinalProject
 
         public void SetPassThroughEnemies(bool value)
         {
-            gameObject.layer = value ? LayerMask.NameToLayer("Invulnerable") : LayerMask.NameToLayer("Player");
+            gameObject.layer = value ? LayerMask.NameToLayer("HatBlink") : LayerMask.NameToLayer("Player");
+        }
+
+        public void DashThrough(bool value)
+        {
+            //noop
         }
     }
 }

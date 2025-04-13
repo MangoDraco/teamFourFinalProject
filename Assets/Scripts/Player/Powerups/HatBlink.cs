@@ -11,12 +11,14 @@ namespace teamFourFinalProject
         {
             player.SetInvulnerable(true);
             player.SetPassThroughEnemies(true);
+            //player.DashForward(true);
         }
 
         public override void RemoveEffects(PlayerController player)
         {
             player.SetInvulnerable(false);
             player.SetPassThroughEnemies(false);
+            //player.DashForward(false);
         }
     }
 }
