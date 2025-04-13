@@ -42,7 +42,7 @@ namespace teamFourFinalProject
             current = nodes[state.GetType()];
         }
 
-        ITranstion GetTransition()
+        ITransition GetTransition()
         {
             foreach (var transition in anyTransitions)
                 if (transition.Condition.Evaluate())

@@ -61,6 +61,8 @@ namespace teamFourFinalProject
         CountdownTimer jumpCooldownTimer;
         CountdownTimer attackTimer;
 
+        StateMachine stateMachine;
+
         private void Awake()
         {
             mainCam = Camera.main.transform;
@@ -77,8 +79,26 @@ namespace teamFourFinalProject
             jumpCooldownTimer = new CountdownTimer(jumpCooldown);
             timers = new List<JumpTimer>(capacity:2) { jumpTimer, jumpCooldownTimer };
 
-            jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
+            //jumpTimer.OnTimerStart =+ () => jumpVelocity = jumpForce;
+            //jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
+
+            //State Machine
+            stateMachine = new StateMachine();
+
+            //Declare States
+            //var locomotionState = new LocomotionState(player: this, animator);
+            //var jumpState = new JumpState(player: this, animator);
+
+            //Define transitions
+            //At(from: locomotionState, to: jumpState, condition: new FuncPredicate(() => jumpTimer.isRunning));
+            //At(from: jumpState, to: locomotionState, condition: new FuncPredicate(() => groundChecker.isGrounded && !jumpTimer.isRunning));
+
+            //Set initial state
+            //stateMachine.SetState(locomotionState);
         }
+
+        //void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
+        //void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
 
         private void Start()
         {
@@ -168,7 +188,7 @@ namespace teamFourFinalProject
             }
         }
 
-        void HandleJump()
+        public void HandleJump()
         {
             if (doubleJumpRequested)
             {
@@ -220,7 +240,7 @@ namespace teamFourFinalProject
             rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
         }
 
-        void HandleMovement()
+        public void HandleMovement()
         {
             //Rotate movement direction to match camera rotation
             var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
