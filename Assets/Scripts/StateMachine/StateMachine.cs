@@ -61,7 +61,7 @@ namespace teamFourFinalProject
 
         public void AddAnyTransition(IState to, IPredicate condition)
         {
-            anyTransitions.Add(item: new Transition(to, condition));
+            anyTransitions.Add(item: new Transition(GetOrAddNode(to).State, condition));
         }
 
         StateNode GetOrAddNode(IState state)
@@ -73,6 +73,8 @@ namespace teamFourFinalProject
                 node = new StateNode(state);
                 nodes.Add(state.GetType(), node);
             }
+
+            return node;
         }
 
         class StateNode
