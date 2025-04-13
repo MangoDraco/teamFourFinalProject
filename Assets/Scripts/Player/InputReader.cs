@@ -17,6 +17,7 @@ namespace teamFourFinalProject
         public event UnityAction EnableMouseControlCamera = delegate { };
         public event UnityAction DisableMouseControlCamera = delegate { };
         public event UnityAction<bool> Jump = delegate { };
+        public event UnityAction ActivatePowerup = delegate { };
 
         PlayerInputActions inputActions;
 
@@ -91,7 +92,10 @@ namespace teamFourFinalProject
 
         public void OnPowerup(InputAction.CallbackContext context)
         {
-            //noop
+            if (context.phase == InputActionPhase.Started)
+            {
+                ActivatePowerup.Invoke();
+            }
         }
 
         public void OnRun(InputAction.CallbackContext context)

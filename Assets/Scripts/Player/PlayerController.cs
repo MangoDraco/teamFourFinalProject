@@ -37,6 +37,10 @@ namespace teamFourFinalProject
         private bool canDoubleJump = false;
         private bool doubleJumpRequested = false;
 
+        [Header("Powerup Settings")]
+        private PowerupData heldPowerup = null;
+        private bool powerupActive = false;
+
         //If making a different way to attack
         /*[Header("Attack Settings")]
         [SerializeField] float attackCooldown = 0.5f;
@@ -60,6 +64,7 @@ namespace teamFourFinalProject
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
         CountdownTimer attackTimer;
+        CountdownTimer powerupTimer;
 
         StateMachine stateMachine;
 
@@ -95,6 +100,21 @@ namespace teamFourFinalProject
 
             //Set initial state
             //stateMachine.SetState(locomotionState);
+
+            //Powerup
+            powerupTimer = new CountdownTimer(0f);
+            timers.Add(powerupTimer);
+
+            powerupTimer.OnTimerStop += () =>
+            {
+                if (heldPowerup != null && powerupActive)
+                {
+                    heldPowerup.RemoveEffects(this);
+                    heldPowerup = null;
+                    powerupActive = false;
+                    Debug.Log("Powerup ended");
+                }
+            };
         }
 
         //void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
@@ -108,11 +128,13 @@ namespace teamFourFinalProject
         void OnEnable()
         {
             input.Jump += OnJump;
+            input.ActivatePowerup += OnPowerup;
         }
 
         void OnDisable()
         {
             input.Jump -= OnJump;
+            input.ActivatePowerup -= OnPowerup;
         }
 
         void OnJump(bool performed)
@@ -162,6 +184,14 @@ namespace teamFourFinalProject
             }
         }*/
 
+        void OnPowerup()
+        {
+            if (heldPowerup != null && !powerupActive)
+            {
+                HandlePowerup();
+            }
+        }
+
         private void Update()
         {
             movement = new Vector3(input.Direction.x, y: 0f, z: input.Direction.y);
@@ -186,6 +216,28 @@ namespace teamFourFinalProject
             {
                 timer.Tick(Time.deltaTime);
             }
+        }
+
+        void HandlePowerup()
+        {
+            heldPowerup.ApplyEffects(this);
+            powerupTimer.Reset(heldPowerup.duration);
+            powerupTimer.Start();
+            powerupActive = true;
+            Debug.Log($"Activated powerup: {heldPowerup.name}");
+        }
+
+        public void PickupPowerup(PowerupData newPowerup)
+        {
+            if (powerupActive)
+            {
+                heldPowerup.RemoveEffects(this);
+                powerupActive = false;
+                powerupTimer.Stop();
+            }
+
+            heldPowerup = newPowerup;
+            Debug.Log($"Picked up powerup: {heldPowerup.name}");
         }
 
         public void HandleJump()
@@ -278,6 +330,16 @@ namespace teamFourFinalProject
         void SmoothSpeed(float value)
         {
             currentSpeed = Mathf.SmoothDamp(current: currentSpeed, target: value, ref velocity, smoothTime);
+        }
+
+        public void SetInvulnerable(bool value)
+        {
+            //Disable damage handling
+        }
+
+        public void SetPassThroughEnemies(bool value)
+        {
+            gameObject.layer = value ? LayerMask.NameToLayer("Invulnerable") : LayerMask.NameToLayer("Player");
         }
     }
 }
