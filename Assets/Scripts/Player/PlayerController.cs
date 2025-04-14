@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using KBCore.Refs;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -36,10 +37,7 @@ namespace teamFourFinalProject
         int currentJumpCount = 0;
         private bool canDoubleJump = false;
         private bool doubleJumpRequested = false;
-
-        [Header("Powerup Settings")]
-        private PowerupData heldPowerup = null;
-        private bool powerupActive = false;
+        private Animator animator;
 
         //If making a different way to attack
         /*[Header("Attack Settings")]
@@ -64,7 +62,6 @@ namespace teamFourFinalProject
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
         CountdownTimer attackTimer;
-        CountdownTimer powerupTimer;
 
         StateMachine stateMachine;
 
@@ -100,21 +97,6 @@ namespace teamFourFinalProject
 
             //Set initial state
             //stateMachine.SetState(locomotionState);
-
-            //Powerup
-            powerupTimer = new CountdownTimer(0f);
-            timers.Add(powerupTimer);
-
-            powerupTimer.OnTimerStop += () =>
-            {
-                if (heldPowerup != null && powerupActive)
-                {
-                    heldPowerup.RemoveEffects(this);
-                    heldPowerup = null;
-                    powerupActive = false;
-                    Debug.Log("Powerup ended");
-                }
-            };
         }
 
         //void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
@@ -123,18 +105,17 @@ namespace teamFourFinalProject
         private void Start()
         {
             input.EnablePlayerActions();
+            animator = GetComponentInChildren<Animator>();
         }
 
         void OnEnable()
         {
             input.Jump += OnJump;
-            input.ActivatePowerup += OnPowerup;
         }
 
         void OnDisable()
         {
             input.Jump -= OnJump;
-            input.ActivatePowerup -= OnPowerup;
         }
 
         void OnJump(bool performed)
@@ -143,6 +124,8 @@ namespace teamFourFinalProject
             
             if (groundChecker.isGrounded)
             {
+                animator.SetBool("isJumping", true);
+                animator.SetBool("isFalling", true);
                 jumpTimer.Start();
                 currentJumpCount = 1;
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
@@ -184,14 +167,6 @@ namespace teamFourFinalProject
             }
         }*/
 
-        void OnPowerup()
-        {
-            if (heldPowerup != null && !powerupActive)
-            {
-                HandlePowerup();
-            }
-        }
-
         private void Update()
         {
             movement = new Vector3(input.Direction.x, y: 0f, z: input.Direction.y);
@@ -218,32 +193,12 @@ namespace teamFourFinalProject
             }
         }
 
-        void HandlePowerup()
-        {
-            heldPowerup.ApplyEffects(this);
-            powerupTimer.Reset(heldPowerup.duration);
-            powerupTimer.Start();
-            powerupActive = true;
-            Debug.Log($"Activated powerup: {heldPowerup.name}");
-        }
-
-        public void PickupPowerup(PowerupData newPowerup)
-        {
-            if (powerupActive)
-            {
-                heldPowerup.RemoveEffects(this);
-                powerupActive = false;
-                powerupTimer.Stop();
-            }
-
-            heldPowerup = newPowerup;
-            Debug.Log($"Picked up powerup: {heldPowerup.name}");
-        }
-
         public void HandleJump()
         {
             if (doubleJumpRequested)
             {
+                animator.SetBool("isDoubleJumping", true);
+                
                 float doubleJumpHeight = jumpMaxHeight * doubleJumpMultiplier;
                 float doubleJumpVelocity = Mathf.Sqrt(2 * doubleJumpHeight * Mathf.Abs(Physics.gravity.y));
                 //jumpVelocity = jumpForce * doubleJumpMultiplier;
@@ -259,6 +214,9 @@ namespace teamFourFinalProject
             //If not jumping and grounded, keep jump velocity at 0
             if (!jumpTimer.isRunning && groundChecker.isGrounded)
             {
+                animator.SetBool("isFalling", false);
+                animator.SetBool("isJumping", false);
+                animator.SetBool("isDoubleJumping", false);
                 jumpVelocity = ZeroF;
                 jumpTimer.Stop();
                 currentJumpCount = 0;
@@ -290,6 +248,7 @@ namespace teamFourFinalProject
 
             //Apply Velocity
             rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
+            
         }
 
         public void HandleMovement()
@@ -308,12 +267,16 @@ namespace teamFourFinalProject
 
                 //Reset horizontal velocity
                 rb.velocity = new Vector3(x: ZeroF, rb.velocity.y, z: ZeroF);
+                animator.SetBool("isFalling", false);
+                animator.SetBool("isWalking", false);
             }
         }
 
         void HandleHorizontalMovement(Vector3 adjustedDirection)
         {
             //Move the player
+            //animator.SetBool("isFalling", false);
+            animator.SetBool("isWalking", true);
             Vector3 velocity = adjustedDirection * moveSpeed * Time.fixedDeltaTime;
             rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
             Debug.Log(velocity);
@@ -330,21 +293,6 @@ namespace teamFourFinalProject
         void SmoothSpeed(float value)
         {
             currentSpeed = Mathf.SmoothDamp(current: currentSpeed, target: value, ref velocity, smoothTime);
-        }
-
-        public void SetInvulnerable(bool value)
-        {
-            //Disable damage handling
-        }
-
-        public void SetPassThroughEnemies(bool value)
-        {
-            gameObject.layer = value ? LayerMask.NameToLayer("HatBlink") : LayerMask.NameToLayer("Player");
-        }
-
-        public void DashThrough(bool value)
-        {
-            //noop
         }
     }
 }

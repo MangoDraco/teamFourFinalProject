@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4774517172213114721}
   - component: {fileID: 8497630071455803588}
   - component: {fileID: 5911347034842733582}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5262929774073069019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17040488, y: -0.25364968, z: 0.6324909, w: 0.71174395}
+  m_LocalRotation: {x: 0.17040178, y: -0.25364724, z: 0.63249403, w: 0.7117427}
   m_LocalPosition: {x: -12.07, y: 10.66, z: 8.92}
   m_LocalScale: {x: 3.5245702, y: 3.5245702, z: 3.5245702}
   m_ConstrainProportionsScale: 0

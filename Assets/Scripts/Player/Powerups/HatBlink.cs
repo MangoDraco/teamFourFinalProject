@@ -2,23 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace teamFourFinalProject
+public class HatBlink : MonoBehaviour
 {
-    [CreateAssetMenu(fileName = "HatBlinkPowerup", menuName = "Platformer/Powerups/HatBlink")]
-    public class HatBlink : PowerupData
-    {
-        public override void ApplyEffects(PlayerController player)
-        {
-            player.SetInvulnerable(true);
-            player.SetPassThroughEnemies(true);
-            //player.DashForward(true);
-        }
+    public Transform player, destination;
+    public GameObject playerg;
 
-        public override void RemoveEffects(PlayerController player)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            player.SetInvulnerable(false);
-            player.SetPassThroughEnemies(false);
-            //player.DashForward(false);
+            playerg.SetActive(false);
+            player.position = destination.position;
+            playerg.SetActive(true);
         }
     }
 }
