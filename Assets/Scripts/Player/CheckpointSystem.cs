@@ -15,6 +15,7 @@ public class CheckpointSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("I entered the checkpoint!");
         if (other.gameObject.tag == "Checkpoint")
         {
             for (int i = 0; i < checkpoints.Length; i++)

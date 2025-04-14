@@ -7,6 +7,9 @@ TagManager:
   - MovingPlatform
   - WeakPoint
   - Enemy
+  - Deathplane
+  - Checkpoint
+  - freeLook
   layers:
   - Default
   - TransparentFX

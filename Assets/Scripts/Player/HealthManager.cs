@@ -1,13 +1,21 @@
+using KBCore.Refs;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using teamFourFinalProject;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
-    public int maxHealth;
-    public int curHealth;
+    public float maxHealth;
+    public float curHealth;
     public GameObject playerPrefab; //add the player in :3
     // Start is called before the first frame update
+    public Transform playerTransform;
+    public static event Action OnPlayerDamaged;
+    public static event Action OnPlayerDeath;
+    [SerializeField] SceneManager sceneManager;
     void Start()
     {
         curHealth = maxHealth;
@@ -16,33 +24,34 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (curHealth == 0)
-        {
-            Death();
-        }
+        
     }
 
-    void TakeDmg(int dmg)
+    public void TakeDmg(float dmg)
     {
-        if (curHealth > 0)
+        curHealth -= dmg;
+        OnPlayerDamaged?.Invoke();
+        if (curHealth <= 0)
         {
-            curHealth -= dmg;
-        }
-        else
-        {
+            curHealth = 0;
+            OnPlayerDeath?.Invoke();
             Death();
         }
     }
 
     public void Death()
     {
-        Destroy(gameObject);
         Debug.Log("You have died");
+        playerPrefab.SetActive(false);
+        sceneManager.LoadNextScene("gameOver");
+        
     }
 
     public void Respawn()
     {
-        Instantiate(playerPrefab, CheckpointSystem.respawnPoint.position, Quaternion.identity);
+        playerPrefab.SetActive(true);
+        playerTransform.position = CheckpointSystem.respawnPoint.position;
+        //Instantiate(playerPrefab, CheckpointSystem.respawnPoint.position, Quaternion.identity);
     }
 
     bool Heal()
