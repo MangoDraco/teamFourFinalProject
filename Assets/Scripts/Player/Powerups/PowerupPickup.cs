@@ -12,7 +12,7 @@ namespace teamFourFinalProject
         {
             if (other.TryGetComponent(out PlayerController player))
             {
-                player.PickupPowerup(powerup);
+                //player.PickupPowerup(powerup);
                 Destroy(gameObject);
             }
         }
