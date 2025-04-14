@@ -31,7 +31,7 @@ public class FlyingEnemy : MonoBehaviour, IStompable
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "Cotton")
         {
             Debug.Log("Player Detected Firing");
             CanShoot = true;
@@ -40,7 +40,7 @@ public class FlyingEnemy : MonoBehaviour, IStompable
 
     void OnTriggerExit(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "Cotton")
         {
             Debug.Log("Player Out of Range");
             CanShoot = false;
