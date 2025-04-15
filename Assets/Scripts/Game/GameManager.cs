@@ -5,10 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] HealthManager healthManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        healthManager.Respawn();
+        
     }
 
     // Update is called once per frame

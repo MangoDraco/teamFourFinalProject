@@ -42,6 +42,8 @@ GameObject:
   - component: {fileID: 6617998727489740268}
   - component: {fileID: 4496174113148386039}
   - component: {fileID: 3378608020895681211}
+  - component: {fileID: 2247708149457354587}
+  - component: {fileID: 7823100949766805593}
   m_Layer: 0
   m_Name: hat
   m_TagString: Untagged
@@ -114,6 +116,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2247708149457354587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381268577461075810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7724fa46e62054a45b988b3e020e8569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  timer: 5
+  enemyBullet: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  enemySpeed: 0
+--- !u!114 &7823100949766805593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381268577461075810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2bc0ad2f8ec6141b012559aba380fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  m_target: {fileID: 0}
 --- !u!1 &1196322967336232585
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,8 +413,8 @@ GameObject:
   - component: {fileID: 262816480644465743}
   - component: {fileID: 4595999449731425582}
   - component: {fileID: 3682770895895192142}
-  - component: {fileID: 7198570534542308357}
-  - component: {fileID: 2066714077162309833}
+  - component: {fileID: 129248694887989252}
+  - component: {fileID: 2024380338299673587}
   m_Layer: 0
   m_Name: Flying Enemy
   m_TagString: Enemy
@@ -476,7 +509,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 13.99
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3682770895895192142
 Rigidbody:
@@ -505,7 +538,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7198570534542308357
+--- !u!114 &129248694887989252
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -514,25 +547,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 8391209125174128231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8de92d010b5f41e4cb76f653f52a4917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 30
-  m_target: {fileID: 0}
---- !u!114 &2066714077162309833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8391209125174128231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3816ad427f35f740ad0d93e3611be8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7724fa46e62054a45b988b3e020e8569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  timer: 4
+  timer: 5
   enemyBullet: {fileID: 3181364442731496597, guid: c255c09c82222414d9dde629271c4b7f, type: 3}
   spawnPoint: {fileID: 8939907213899884597}
   enemySpeed: 1000
+--- !u!114 &2024380338299673587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8391209125174128231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2bc0ad2f8ec6141b012559aba380fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 40
+  m_target: {fileID: 0}

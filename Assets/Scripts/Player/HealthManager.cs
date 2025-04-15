@@ -10,15 +10,16 @@ public class HealthManager : MonoBehaviour
 {
     public float maxHealth;
     public float curHealth;
+    public bool dead;
     public GameObject playerPrefab; //add the player in :3
     // Start is called before the first frame update
-    public Transform playerTransform;
     public static event Action OnPlayerDamaged;
     public static event Action OnPlayerDeath;
     [SerializeField] SceneManager sceneManager;
     void Start()
     {
         curHealth = maxHealth;
+        
     }
 
     // Update is called once per frame
@@ -36,22 +37,26 @@ public class HealthManager : MonoBehaviour
             curHealth = 0;
             OnPlayerDeath?.Invoke();
             Death();
+            
         }
     }
 
     public void Death()
     {
-        Debug.Log("You have died");
+        Debug.Log(dead);
+        dead = true;
+        Debug.Log(dead);
         playerPrefab.SetActive(false);
-        sceneManager.LoadNextScene("gameOver");
+        
         
     }
 
     public void Respawn()
     {
+        dead = false;
+        curHealth = maxHealth;
+        playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
         playerPrefab.SetActive(true);
-        playerTransform.position = CheckpointSystem.respawnPoint.position;
-        //Instantiate(playerPrefab, CheckpointSystem.respawnPoint.position, Quaternion.identity);
     }
 
     bool Heal()

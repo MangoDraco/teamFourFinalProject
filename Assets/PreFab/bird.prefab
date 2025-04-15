@@ -175,10 +175,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6253927530459981585}
-  - component: {fileID: 6301435978195038645}
   - component: {fileID: 4192334953479397590}
   - component: {fileID: -5319974547363030211}
   - component: {fileID: 8440499640273436186}
+  - component: {fileID: 5438041355659921044}
+  - component: {fileID: 1182585056254447140}
   m_Layer: 0
   m_Name: bird
   m_TagString: Untagged
@@ -214,20 +215,6 @@ Transform:
   - {fileID: 6634252026026726022}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &6301435978195038645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3181364442731496597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7a0a8af16b9590409c6ba14e37f94e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  src: {fileID: 4192334953479397590}
-  impact: {fileID: 8300000, guid: 1e11a3179ad571a4fb7ec4b9aa441177, type: 3}
 --- !u!82 &4192334953479397590
 AudioSource:
   m_ObjectHideFlags: 0
@@ -240,7 +227,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1e11a3179ad571a4fb7ec4b9aa441177, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.724
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -284,7 +271,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.703
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -372,6 +359,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5438041355659921044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181364442731496597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4075ee2d946beb46912d70da95986dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  src: {fileID: 4192334953479397590}
+  impact: {fileID: 8300000, guid: 1e11a3179ad571a4fb7ec4b9aa441177, type: 3}
+--- !u!114 &1182585056254447140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181364442731496597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f42a142499dffc94dbabaf021d919de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3787644204039621353
 GameObject:
   m_ObjectHideFlags: 0

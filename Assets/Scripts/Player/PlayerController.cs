@@ -6,6 +6,7 @@ using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace teamFourFinalProject
 {
@@ -20,6 +21,7 @@ namespace teamFourFinalProject
         [SerializeField, Self] GroundChecker groundChecker;
         [SerializeField, Anywhere] CinemachineFreeLook freelookVCam;
         [SerializeField, Anywhere] InputReader input;
+
 
         [Header("Settings")]
         [SerializeField] float moveSpeed = 6f;
@@ -38,6 +40,25 @@ namespace teamFourFinalProject
         private bool canDoubleJump = false;
         private bool doubleJumpRequested = false;
         private Animator animator;
+
+        [Header("Sounds")]
+        AudioSource audioSource;
+        [SerializeField] AudioSource jump;
+        [SerializeField] AudioSource walk;
+        [SerializeField] AudioSource hurt;
+        [SerializeField] AudioClip walkSound;
+        [SerializeField] AudioClip hurtSound;
+
+        [Header("Powerup Settings")]
+        private PowerupData heldPowerup = null;
+        private bool powerupActive = false;
+
+        [Header("Camera Controller Settings")]
+        [SerializeField] float controllerSensitivity = 300f;
+        [SerializeField] float controllerSmoothTime = 0.2f; //lower = snappier, higher = smoother
+        private Vector2 controllerLookVelocity;
+        private Vector2 currentControllerLook;
+
 
         //If making a different way to attack
         /*[Header("Attack Settings")]
@@ -62,6 +83,7 @@ namespace teamFourFinalProject
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
         CountdownTimer attackTimer;
+        CountdownTimer powerupTimer;
 
         StateMachine stateMachine;
 
@@ -111,11 +133,15 @@ namespace teamFourFinalProject
         void OnEnable()
         {
             input.Jump += OnJump;
+            //input.ActivatePowerup += OnPowerup;
+            input.Look += OnLook;
         }
 
         void OnDisable()
         {
             input.Jump -= OnJump;
+            //input.ActivatePowerup -= OnPowerup;
+            input.Look -= OnLook;
         }
 
         void OnJump(bool performed)
@@ -124,6 +150,8 @@ namespace teamFourFinalProject
             
             if (groundChecker.isGrounded)
             {
+                walk.Stop();
+                jump.Play();
                 animator.SetBool("isJumping", true);
                 animator.SetBool("isFalling", true);
                 jumpTimer.Start();
@@ -137,9 +165,43 @@ namespace teamFourFinalProject
                 doubleJumpRequested = true;
                 currentJumpCount++;
                 canDoubleJump = false;
-                Debug.Log("Double jump");
+                
             }
         }
+
+
+    void OnPowerup()
+        {
+            if (heldPowerup != null && !powerupActive)
+            {
+                //HandlePowerup();
+            }
+        }
+
+        void OnLook(Vector2 lookDelta, bool isMouse)
+        {
+            if (isMouse)
+            {
+                freelookVCam.m_XAxis.Value += lookDelta.x;
+                freelookVCam.m_YAxis.Value += lookDelta.y;
+            }
+
+            else
+            {
+                {
+                    currentControllerLook = Vector2.SmoothDamp(
+                        currentControllerLook,
+                        lookDelta,
+                        ref controllerLookVelocity,
+                        controllerSmoothTime
+                        );
+
+                    freelookVCam.m_XAxis.Value += lookDelta.x * controllerSensitivity * Time.deltaTime;
+                    freelookVCam.m_YAxis.Value -= lookDelta.y * controllerSensitivity * Time.deltaTime;
+                }
+            }
+        }
+
 
         //Left just in case we want to revert to original
         /*void OnJump(bool performed)
@@ -198,7 +260,8 @@ namespace teamFourFinalProject
             if (doubleJumpRequested)
             {
                 animator.SetBool("isDoubleJumping", true);
-                
+                jump.Play();
+                walk.Stop();
                 float doubleJumpHeight = jumpMaxHeight * doubleJumpMultiplier;
                 float doubleJumpVelocity = Mathf.Sqrt(2 * doubleJumpHeight * Mathf.Abs(Physics.gravity.y));
                 //jumpVelocity = jumpForce * doubleJumpMultiplier;
@@ -208,12 +271,14 @@ namespace teamFourFinalProject
 
             else if (!groundChecker.isGrounded)
             {
+                walk.Stop();
                 jumpVelocity += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
             }
 
             //If not jumping and grounded, keep jump velocity at 0
             if (!jumpTimer.isRunning && groundChecker.isGrounded)
             {
+                
                 animator.SetBool("isFalling", false);
                 animator.SetBool("isJumping", false);
                 animator.SetBool("isDoubleJumping", false);
@@ -269,17 +334,24 @@ namespace teamFourFinalProject
                 rb.velocity = new Vector3(x: ZeroF, rb.velocity.y, z: ZeroF);
                 animator.SetBool("isFalling", false);
                 animator.SetBool("isWalking", false);
+                
+                walk.Stop();
             }
         }
 
         void HandleHorizontalMovement(Vector3 adjustedDirection)
         {
             //Move the player
-            //animator.SetBool("isFalling", false);
+            
+            animator.SetBool("isFalling", false);
             animator.SetBool("isWalking", true);
             Vector3 velocity = adjustedDirection * moveSpeed * Time.fixedDeltaTime;
             rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
-            Debug.Log(velocity);
+            if(!walk.isPlaying && groundChecker.isGrounded)
+            {
+                walk.Play();
+            }
+            
         }
 
         void HandleRotation(Vector3 adjustedDirection)
@@ -293,6 +365,43 @@ namespace teamFourFinalProject
         void SmoothSpeed(float value)
         {
             currentSpeed = Mathf.SmoothDamp(current: currentSpeed, target: value, ref velocity, smoothTime);
+     
+        }
+        public void SetInvulnerable(bool value)
+        {
+            //Disable damage handling
+        }
+
+        public void SetPassThroughEnemies(bool value)
+        {
+            gameObject.layer = value ? LayerMask.NameToLayer("HatBlink") : LayerMask.NameToLayer("Player");
+        }
+
+        public void DashThrough(bool value)
+        {
+            //noop
+        }
+        void HandlePowerup()
+        {
+            heldPowerup.ApplyEffects(this);
+            powerupTimer.Reset(heldPowerup.duration);
+            powerupTimer.Start();
+            powerupActive = true;
+            Debug.Log($"Activated powerup: {heldPowerup.name}");
+        }
+
+        public void PickupPowerup(PowerupData newPowerup)
+        {
+            if (powerupActive)
+            {
+                heldPowerup.RemoveEffects(this);
+                powerupActive = false;
+                powerupTimer.Stop();
+            }
+
+            heldPowerup = newPowerup;
+            Debug.Log($"Picked up powerup: {heldPowerup.name}");
         }
     }
+    
 }

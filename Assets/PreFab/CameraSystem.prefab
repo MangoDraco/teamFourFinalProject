@@ -959,9 +959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666458590599999333}
   - component: {fileID: 7020899103272927365}
-  - component: {fileID: 8154527385157857561}
   - component: {fileID: 1865919087084951395}
-  - component: {fileID: 2973585841063456537}
   m_Layer: 0
   m_Name: CameraSystem
   m_TagString: Untagged
@@ -1002,18 +1000,6 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: aa6418ba2333a2f4792a409af0128d01, type: 2}
   freeLookVCam: {fileID: 1784223417562580656}
   speedMultiplier: 1
---- !u!114 &8154527385157857561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8597466098479915858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8f50e9e67579e4fa038e7415f6e60f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1865919087084951395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,24 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05daefc846de62c4b84375317db6a536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthManager: {fileID: 2973585841063456537}
---- !u!114 &2973585841063456537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8597466098479915858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75bb4ffa2c4c6804aaf077423c13bf61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  curHealth: 5
-  playerPrefab: {fileID: 2576308976697182822, guid: c108e7012edc942428c465986651d6ff, type: 3}
-  playerTransform: {fileID: 0}
-  sceneManager: {fileID: 8154527385157857561}
+  healthManager: {fileID: 0}
 --- !u!1 &9166124332375218940
 GameObject:
   m_ObjectHideFlags: 3

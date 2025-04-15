@@ -38,12 +38,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""fe5026e6-9cfe-4d27-bc9e-e2069fd3cd71"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""MouseControlCamera"",
@@ -60,7 +60,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""id"": ""157a3f78-9bc2-41b7-88ce-a437acf0605b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -267,7 +267,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1d444d88-69ca-4b51-9c36-a9d40496f18e"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -415,7 +415,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""cb6b9a91-6809-4065-b611-7e81228d2cd0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false

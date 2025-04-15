@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 3924187734822016247}
   - component: {fileID: 6615298682184983383}
   - component: {fileID: 4093401350579380309}
+  - component: {fileID: 4436234376309843847}
   m_Layer: 0
   m_Name: HatBlink PowerUp
   m_TagString: Untagged
@@ -192,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4710938042156520086}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.62807095, y: -0.7435525, z: -0.17749922, w: 0.14543226}
+  m_LocalRotation: {x: -0.62807196, y: -0.74355054, z: -0.17749931, w: 0.14543824}
   m_LocalPosition: {x: 2.41, y: 0.75, z: -5.72}
   m_LocalScale: {x: 0.072278455, y: 0.072278455, z: 0.072278455}
   m_ConstrainProportionsScale: 0
@@ -230,9 +231,22 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 11.063269, y: 16.150137, z: 18.959503}
   m_Center: {x: 0.6581611, y: -0.20754375, z: -1.0889064}
+--- !u!114 &4436234376309843847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710938042156520086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6d0ec1c3ce56f4b963e58d3fbc3b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerup: {fileID: 0}

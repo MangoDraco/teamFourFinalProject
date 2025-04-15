@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 4309015568310939206}
   - component: {fileID: 8449907813226231596}
   - component: {fileID: 2893755227269318327}
+  - component: {fileID: 1717124121550790933}
   m_Layer: 0
   m_Name: Cotton
   m_TagString: Player
@@ -697,6 +698,24 @@ MonoBehaviour:
   playerPrefab: {fileID: 2576308976697182822}
   playerTransform: {fileID: 4604540424721767667}
   sceneManager: {fileID: 8449907813226231596}
+--- !u!114 &1717124121550790933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576308976697182822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37cab7ff92877b40b3ad3687c78df11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &2584230181639607754
 GameObject:
   m_ObjectHideFlags: 0
