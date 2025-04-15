@@ -9,12 +9,14 @@ namespace teamFourFinalProject
     {
         [SerializeField] float groundDistance = 0.08f;
         [SerializeField] LayerMask groundLayers;
+        [SerializeField] LayerMask cardLayers;
 
         public bool isGrounded { get; private set; }
 
         private void Update()
         {
             isGrounded = Physics.SphereCast(origin: transform.position, radius: groundDistance, direction: Vector3.down, out _, groundDistance, (int)groundLayers);
+            isCardGrounded = Physics.SphereCast(origin: transform.position, radius: groundDistance, direction: Vector3.down, out _, groundDistance, (int)cardLayers);
         }
 
         private void OnDrawGizmos()
