@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 4192334953479397590}
   - component: {fileID: -5319974547363030211}
   - component: {fileID: 8440499640273436186}
-  - component: {fileID: 5438041355659921044}
+  - component: {fileID: 5447410277862742457}
   - component: {fileID: 1182585056254447140}
   m_Layer: 11
   m_Name: bird
@@ -359,7 +359,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5438041355659921044
+--- !u!114 &5447410277862742457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

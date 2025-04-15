@@ -16,10 +16,13 @@ public class HealthManager : MonoBehaviour
     public static event Action OnPlayerDamaged;
     public static event Action OnPlayerDeath;
     [SerializeField] SceneManager sceneManager;
+    [SerializeField] AudioSource hurt;
+    [SerializeField] AudioClip hurtSound;
     void Start()
     {
         curHealth = maxHealth;
         
+
     }
 
     // Update is called once per frame
@@ -31,6 +34,7 @@ public class HealthManager : MonoBehaviour
     public void TakeDmg(float dmg)
     {
         curHealth -= dmg;
+        hurt.Play();
         OnPlayerDamaged?.Invoke();
         if (curHealth <= 0)
         {
@@ -55,6 +59,7 @@ public class HealthManager : MonoBehaviour
     {
         dead = false;
         curHealth = maxHealth;
+        OnPlayerDamaged?.Invoke();
         playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
         playerPrefab.SetActive(true);
     }

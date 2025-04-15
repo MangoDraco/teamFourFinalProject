@@ -14,6 +14,8 @@ public class gameOverToggle : MonoBehaviour
     void Start()
     {
         button.SetActive(false);
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -27,6 +29,9 @@ public class gameOverToggle : MonoBehaviour
             bgFlag = true;
             button.SetActive(true);
             buttonPress.onClick.AddListener(OnButtonClick);
+            UnityEngine.Cursor.visible = true;
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+
         }
     }
     void OnButtonClick()
@@ -34,5 +39,7 @@ public class gameOverToggle : MonoBehaviour
         buttonPress.onClick.RemoveListener(OnButtonClick);
         button.SetActive(false);
         bgFlag = false;
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
 }

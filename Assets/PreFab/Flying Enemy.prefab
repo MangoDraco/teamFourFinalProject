@@ -413,8 +413,8 @@ GameObject:
   - component: {fileID: 262816480644465743}
   - component: {fileID: 4595999449731425582}
   - component: {fileID: 3682770895895192142}
-  - component: {fileID: 129248694887989252}
-  - component: {fileID: 2024380338299673587}
+  - component: {fileID: 658543580009464662}
+  - component: {fileID: 4458752609359162808}
   m_Layer: 0
   m_Name: Flying Enemy
   m_TagString: Enemy
@@ -538,7 +538,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &129248694887989252
+--- !u!114 &658543580009464662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -553,9 +553,9 @@ MonoBehaviour:
   player: {fileID: 0}
   timer: 5
   enemyBullet: {fileID: 3181364442731496597, guid: c255c09c82222414d9dde629271c4b7f, type: 3}
-  spawnPoint: {fileID: 8939907213899884597}
+  spawnPoint: {fileID: 0}
   enemySpeed: 1000
---- !u!114 &2024380338299673587
+--- !u!114 &4458752609359162808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
