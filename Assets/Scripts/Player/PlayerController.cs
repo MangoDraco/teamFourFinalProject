@@ -7,6 +7,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Audio;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace teamFourFinalProject
 {
@@ -50,9 +51,10 @@ namespace teamFourFinalProject
         [SerializeField] AudioClip hurtSound;
 
         [Header("Powerup Settings")]
+        [SerializeField] float dashCooldown = 0f;
         private PowerupData heldPowerup = null;
         private bool powerupActive = false;
-        public Transform playerPos, destination;
+        public Transform player, destination;
         public GameObject playerg;
 
         [Header("Camera Controller Settings")]
@@ -87,6 +89,7 @@ namespace teamFourFinalProject
         CountdownTimer jumpCooldownTimer;
         CountdownTimer attackTimer;
         CountdownTimer powerupTimer;
+        CountdownTimer dashCooldownTimer;
 
         StateMachine stateMachine;
 
@@ -104,7 +107,9 @@ namespace teamFourFinalProject
             //Setting up timers
             jumpTimer = new CountdownTimer(jumpDuration);
             jumpCooldownTimer = new CountdownTimer(jumpCooldown);
-            timers = new List<JumpTimer>(capacity:2) { jumpTimer, jumpCooldownTimer };
+            timers = new List<JumpTimer>(capacity: 2) { jumpTimer, jumpCooldownTimer };
+            dashCooldownTimer = new CountdownTimer(dashCooldown);
+            timers.Add(dashCooldownTimer);
 
             //jumpTimer.OnTimerStart =+ () => jumpVelocity = jumpForce;
             //jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
@@ -122,6 +127,21 @@ namespace teamFourFinalProject
 
             //Set initial state
             //stateMachine.SetState(locomotionState);
+
+            //Powerup
+            powerupTimer = new CountdownTimer(0f);
+            timers.Add(powerupTimer);
+
+            powerupTimer.OnTimerStop += () =>
+            {
+                if (heldPowerup != null && powerupActive)
+                {
+                    heldPowerup.RemoveEffects(this);
+                    heldPowerup = null;
+                    powerupActive = false;
+                    Debug.Log("Powerup ended");
+                }
+            };
         }
 
         //void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
@@ -136,21 +156,21 @@ namespace teamFourFinalProject
         void OnEnable()
         {
             input.Jump += OnJump;
-            //input.ActivatePowerup += OnPowerup;
+            input.ActivatePowerup += OnPowerup;
             input.Look += OnLook;
         }
 
         void OnDisable()
         {
             input.Jump -= OnJump;
-            //input.ActivatePowerup -= OnPowerup;
+            input.ActivatePowerup -= OnPowerup;
             input.Look -= OnLook;
         }
 
         void OnJump(bool performed)
         {
             if (!performed) return;
-            
+
             if (groundChecker.isGrounded)
             {
                 walk.Stop();
@@ -168,15 +188,23 @@ namespace teamFourFinalProject
                 doubleJumpRequested = true;
                 currentJumpCount++;
                 canDoubleJump = false;
-                
             }
         }
 
 
-    void OnPowerup()
+        void OnPowerup()
         {
-
             DashThrough();
+
+            if (heldPowerup != null && !powerupActive)
+            {
+                HandlePowerup();
+            }
+
+            else if (powerupActive)
+            {
+                DashThrough();
+            }
         }
 
         void OnLook(Vector2 lookDelta, bool isMouse)
@@ -202,33 +230,6 @@ namespace teamFourFinalProject
                 }
             }
         }
-
-
-        //Left just in case we want to revert to original
-        /*void OnJump(bool performed)
-        {
-            Debug.Log($"Jump Input: {performed}, JumpTimerRunning: {jumpTimer.isRunning}, CooldownRunning: {jumpCooldownTimer.isRunning}, Grounded: {groundChecker.isGrounded}");
-            if (performed && !jumpTimer.isRunning && !jumpCooldownTimer.isRunning && groundChecker.isGrounded)
-            {
-                Debug.Log("Jump started!");
-                jumpTimer.Start();
-                currentJumpCount++;
-                Debug.Log($"Jump {currentJumpCount} / {maxJumpCount}");
-                canDoubleJump = true;
-            }
-
-            else if (!performed && jumpTimer.isRunning && canDoubleJump && currentJumpCount < maxJumpCount)
-            {
-                Debug.Log("Jump stopped early");
-                jumpTimer.Stop();
-
-                float doubleJumpForce = jumpForce * doubleJumpMultiplier;
-                rb.velocity = new Vector3(rb.velocity.x, doubleJumpForce, rb.velocity.z);
-
-                currentJumpCount++;
-                canDoubleJump = false;
-            }
-        }*/
 
         private void Update()
         {
@@ -257,6 +258,19 @@ namespace teamFourFinalProject
             }
         }
 
+        public void PickupPowerup(PowerupData newPowerup)
+        {
+            if (powerupActive)
+            {
+                heldPowerup.RemoveEffects(this);
+                powerupActive = false;
+                powerupTimer.Stop();
+            }
+
+            heldPowerup = newPowerup;
+            Debug.Log($"Picked up powerup: {heldPowerup.name}");
+        }
+
         public void HandleJump()
         {
             if (doubleJumpRequested)
@@ -280,7 +294,7 @@ namespace teamFourFinalProject
             //If not jumping and grounded, keep jump velocity at 0
             if (!jumpTimer.isRunning && groundChecker.isGrounded)
             {
-                
+
                 animator.SetBool("isFalling", false);
                 animator.SetBool("isJumping", false);
                 animator.SetBool("isDoubleJumping", false);
@@ -315,7 +329,7 @@ namespace teamFourFinalProject
 
             //Apply Velocity
             rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
-            
+
         }
 
         public void HandleMovement()
@@ -336,7 +350,7 @@ namespace teamFourFinalProject
                 rb.velocity = new Vector3(x: ZeroF, rb.velocity.y, z: ZeroF);
                 animator.SetBool("isFalling", false);
                 animator.SetBool("isWalking", false);
-                
+
                 walk.Stop();
             }
         }
@@ -344,16 +358,16 @@ namespace teamFourFinalProject
         void HandleHorizontalMovement(Vector3 adjustedDirection)
         {
             //Move the player
-            
+
             animator.SetBool("isFalling", false);
             animator.SetBool("isWalking", true);
             Vector3 velocity = adjustedDirection * moveSpeed * Time.fixedDeltaTime;
             rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
-            if(!walk.isPlaying && groundChecker.isGrounded)
+            if (!walk.isPlaying && groundChecker.isGrounded)
             {
                 walk.Play();
             }
-            
+
         }
 
         void HandleRotation(Vector3 adjustedDirection)
@@ -367,7 +381,7 @@ namespace teamFourFinalProject
         void SmoothSpeed(float value)
         {
             currentSpeed = Mathf.SmoothDamp(current: currentSpeed, target: value, ref velocity, smoothTime);
-     
+
         }
         public void SetInvulnerable(bool value)
         {
@@ -381,14 +395,19 @@ namespace teamFourFinalProject
 
         public void DashThrough()
         {
-            /*
-            if (HatBlinkPowerupAlt.powerUpFlag)
+            if (!powerupActive || dashCooldownTimer.isRunning) return;
+
+            if (CompareTag("Player"))
             {
-                    playerg.SetActive(false);
-                    playerPos.position = destination.position;
-                    playerg.SetActive(true);
+                playerg.SetActive(false);
+                player.position = destination.position;
+                playerg.SetActive(true);
+
+                Debug.Log("Dash");
+
+                dashCooldownTimer.Reset(dashCooldown);
+                dashCooldownTimer.Start();
             }
-            */
         }
         void HandlePowerup()
         {
@@ -398,19 +417,5 @@ namespace teamFourFinalProject
             powerupActive = true;
             Debug.Log($"Activated powerup: {heldPowerup.name}");
         }
-
-        public void PickupPowerup(PowerupData newPowerup)
-        {
-            if (powerupActive)
-            {
-                heldPowerup.RemoveEffects(this);
-                powerupActive = false;
-                powerupTimer.Stop();
-            }
-
-            heldPowerup = newPowerup;
-            Debug.Log($"Picked up powerup: {heldPowerup.name}");
-        }
     }
-    
 }
