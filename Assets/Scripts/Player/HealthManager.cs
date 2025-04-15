@@ -51,14 +51,21 @@ public class HealthManager : MonoBehaviour
         dead = true;
         Debug.Log(dead);
         playerPrefab.SetActive(false);
-        
-        
+    }
+
+    public void MapDeath()
+    {
+         playerPrefab.SetActive(false);
+         curHealth -= 1;
     }
 
     public void Respawn()
     {
+        if (dead)
+        {
+            curHealth = maxHealth;
+        }
         dead = false;
-        curHealth = maxHealth;
         OnPlayerDamaged?.Invoke();
         playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
         playerPrefab.SetActive(true);
@@ -96,7 +103,7 @@ public class HealthManager : MonoBehaviour
     {
         if (other.gameObject.tag == "Deathplane")
         {
-            Death();
+            MapDeath();
         }
 
     }
