@@ -91,7 +91,10 @@ namespace teamFourFinalProject
 
         public void OnPowerup(InputAction.CallbackContext context)
         {
-            //noop
+            if (context.phase == InputActionPhase.Started)
+            {
+                //ActivatePowerup.Invoke();
+            }
         }
 
         public void OnRun(InputAction.CallbackContext context)

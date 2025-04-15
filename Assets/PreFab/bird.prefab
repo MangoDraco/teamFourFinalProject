@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5639882474955838394}
   - component: {fileID: 4788979517145757409}
   - component: {fileID: 372766788545034807}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: club
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7623068731900395539}
   - component: {fileID: 1176803819755529759}
   - component: {fileID: 8325745277987107917}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: club1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 8440499640273436186}
   - component: {fileID: 5438041355659921044}
   - component: {fileID: 1182585056254447140}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.703
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -301,7 +301,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.971
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 5498729992762179603}
   - component: {fileID: 5302231308945345169}
   - component: {fileID: 4688938528905548886}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: diamond1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 5027007907986310911}
   - component: {fileID: 521382153406514104}
   - component: {fileID: 519064611326252516}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: heart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 6634458265591162595}
   - component: {fileID: 7190411412359628246}
   - component: {fileID: 605046774525669636}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 7729725781183839581}
   - component: {fileID: 8853449469870227088}
   - component: {fileID: 7456776375663480316}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 4852158135690139929}
   - component: {fileID: 4843260690657115141}
   - component: {fileID: 882046934320112716}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 6634252026026726022}
   - component: {fileID: 4191781520464715301}
   - component: {fileID: 2833143283166824320}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5641,7 +5641,7 @@ GameObject:
   - component: {fileID: 6359962577675805566}
   - component: {fileID: 6662034453700354982}
   - component: {fileID: 2826428938861037231}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5724,7 +5724,7 @@ GameObject:
   - component: {fileID: 2416765052345765410}
   - component: {fileID: 1771702272401330257}
   - component: {fileID: 277199075304068496}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5807,7 +5807,7 @@ GameObject:
   - component: {fileID: 3754445056107949919}
   - component: {fileID: 954365156203738085}
   - component: {fileID: 9100194098388326672}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5890,7 +5890,7 @@ GameObject:
   - component: {fileID: 3350662672415280556}
   - component: {fileID: 4659135871580424475}
   - component: {fileID: 645496555218172717}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5973,7 +5973,7 @@ GameObject:
   - component: {fileID: 7522819706964254752}
   - component: {fileID: 6936390641753378369}
   - component: {fileID: 1897680063487717948}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: beak
   m_TagString: Untagged
   m_Icon: {fileID: 0}

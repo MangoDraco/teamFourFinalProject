@@ -21,9 +21,9 @@ TagManager:
   - Obstruction
   - Ground
   - Walls
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - HatBlink
   - 
   - 
   - 

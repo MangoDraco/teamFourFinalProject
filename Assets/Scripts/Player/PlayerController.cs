@@ -52,6 +52,8 @@ namespace teamFourFinalProject
         [Header("Powerup Settings")]
         private PowerupData heldPowerup = null;
         private bool powerupActive = false;
+        public Transform playerPos, destination;
+        public GameObject playerg;
 
         [Header("Camera Controller Settings")]
         [SerializeField] float controllerSensitivity = 300f;
@@ -72,6 +74,7 @@ namespace teamFourFinalProject
         float currentSpeed;
         float velocity;
         float jumpVelocity;
+        
 
         Transform mainCam;
 
@@ -172,10 +175,8 @@ namespace teamFourFinalProject
 
     void OnPowerup()
         {
-            if (heldPowerup != null && !powerupActive)
-            {
-                //HandlePowerup();
-            }
+
+            DashThrough();
         }
 
         void OnLook(Vector2 lookDelta, bool isMouse)
@@ -235,6 +236,7 @@ namespace teamFourFinalProject
 
             HandleAnimator();
             HandleTimers();
+            HandlePowerup();
         }
 
         private void FixedUpdate()
@@ -377,9 +379,16 @@ namespace teamFourFinalProject
             gameObject.layer = value ? LayerMask.NameToLayer("HatBlink") : LayerMask.NameToLayer("Player");
         }
 
-        public void DashThrough(bool value)
+        public void DashThrough()
         {
-            //noop
+            /*
+            if (HatBlinkPowerupAlt.powerUpFlag)
+            {
+                    playerg.SetActive(false);
+                    playerPos.position = destination.position;
+                    playerg.SetActive(true);
+            }
+            */
         }
         void HandlePowerup()
         {
