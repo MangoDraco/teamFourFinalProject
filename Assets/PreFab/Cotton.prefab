@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 2105077283570355326}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.98, y: -0.419, z: 0}
+  m_LocalPosition: {x: 7.98, y: -0.419, z: 32.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -551,6 +551,8 @@ GameObject:
   - component: {fileID: 5280317583415507202}
   - component: {fileID: 1959302309307471534}
   - component: {fileID: 4309015568310939206}
+  - component: {fileID: 8449907813226231596}
+  - component: {fileID: 2893755227269318327}
   m_Layer: 0
   m_Name: Cotton
   m_TagString: Player
@@ -666,6 +668,35 @@ CapsuleCollider:
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8449907813226231596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576308976697182822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8f50e9e67579e4fa038e7415f6e60f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2893755227269318327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576308976697182822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bb4ffa2c4c6804aaf077423c13bf61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  curHealth: 5
+  playerPrefab: {fileID: 2576308976697182822}
+  playerTransform: {fileID: 4604540424721767667}
+  sceneManager: {fileID: 8449907813226231596}
 --- !u!1 &2584230181639607754
 GameObject:
   m_ObjectHideFlags: 0
