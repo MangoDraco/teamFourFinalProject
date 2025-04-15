@@ -34,7 +34,7 @@ public class Trackingsystem : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "Cotton")
         {
             Debug.Log("Enemy can see player");
             CanSee = true;
@@ -43,7 +43,7 @@ public class Trackingsystem : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "Cotton")
         {
             Debug.Log("Enemy cannot see player");
             CanSee = false;
