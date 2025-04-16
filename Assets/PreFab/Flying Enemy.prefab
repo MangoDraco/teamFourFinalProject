@@ -553,7 +553,7 @@ MonoBehaviour:
   player: {fileID: 0}
   timer: 5
   enemyBullet: {fileID: 3181364442731496597, guid: c255c09c82222414d9dde629271c4b7f, type: 3}
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 8939907213899884597}
   enemySpeed: 1000
 --- !u!114 &4458752609359162808
 MonoBehaviour:
