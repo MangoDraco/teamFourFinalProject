@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 4496174113148386039}
   - component: {fileID: 3378608020895681211}
   - component: {fileID: 2247708149457354587}
-  - component: {fileID: 7823100949766805593}
   m_Layer: 0
   m_Name: hat
   m_TagString: Untagged
@@ -133,20 +132,6 @@ MonoBehaviour:
   enemyBullet: {fileID: 0}
   spawnPoint: {fileID: 0}
   enemySpeed: 0
---- !u!114 &7823100949766805593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381268577461075810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f2bc0ad2f8ec6141b012559aba380fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  m_target: {fileID: 0}
 --- !u!1 &1196322967336232585
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,8 +549,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8391209125174128231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f2bc0ad2f8ec6141b012559aba380fa, type: 3}
+  m_Script: {fileID: 11500000, guid: b86bafc01306cdd4cb8eca3f540d3ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
+  speed: 3
   m_target: {fileID: 0}
