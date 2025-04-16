@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-
+/*
 public class CardPlatform : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -146,3 +146,4 @@ public class CardPlatform : MonoBehaviour
         Destroy(platPrefab.gameObject);
     }
 }
+*/
