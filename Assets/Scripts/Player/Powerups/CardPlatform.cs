@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using teamFourFinalProject;
 using UnityEngine;
-/*
+
 public class CardPlatform : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -12,6 +13,9 @@ public class CardPlatform : MonoBehaviour
     public GameObject redPlat; //red platform
     public GameObject blackPlat; //black platform
     public Transform playerPrefab;
+    public HealthManager healthManager;
+    public GroundChecker groundChecker;
+    public PlayerController playerController;
     private Vector3 forwardOffset;
     public float despawnTimer = 5.0f;
     public int cardVal = 0;
@@ -19,11 +23,16 @@ public class CardPlatform : MonoBehaviour
     public bool upgradeAppl = false;
     public int tempHealth;
 
+    //Things that need to be done
+    //Red card and black card Need the Red Card and Black Card tag
+    //both need to be put under the card layermask in groundchecker
+
     void Start()
     {
         redBlack = false; //start on black
         forwardOffset = new Vector3(150, 0, 0);
         canThrow = true;
+        
     }
 
     // Update is called once per frame
@@ -41,9 +50,9 @@ public class CardPlatform : MonoBehaviour
             throwCd = 2.0f;
         }
 
-        if (!GroundChecker.isCardGrounded && groundUpgrade = false) //not on card
+        if (!groundChecker.isCardGrounded && groundUpgrade == false) //not on card
         {
-            if (GroundChecker.isCardGrounded ) //on card 
+            if (groundChecker.isCardGrounded ) //on card 
             {
                 groundUpgrade = true; //upgrade can be put on
                 if(groundUpgrade )
@@ -53,34 +62,34 @@ public class CardPlatform : MonoBehaviour
                 }
                 
             }
-            if (!GroundChecker.isCardGrounded) //off card
+            if (!groundChecker.isCardGrounded) //off card
             {
                 groundUpgrade = false; //upgrade cannot be put on
             }
 
             //This controls and manages the health gain
-            if (GroundChecker.isGrounded || (GroundChecker.isCardGrounded && cardVal = 1)) //touch a different ground or black card
+            if (groundChecker.isGrounded || (groundChecker.isCardGrounded && cardVal == 1)) //touch a different ground or black card
             {
                 if (upgradeAppl) //upgrade has been applied
                 {
                     upgradeAppl = false;
-                    if (HealthManager.curHealth == tempHealth) //checks if u have not lost the extra hitpoint (true)
+                    if (healthManager.curHealth == tempHealth) //checks if u have not lost the extra hitpoint (true)
                     {
-                        HealthManager.curHealth -= 1; //takes it away
+                        healthManager.curHealth -= 1; //takes it away
                     }
                 }
             }
 
-            if (GroundChecker.isGrounded || GroundChecker.isCardGrounded) //touch a different ground or new card
+            if (groundChecker.isGrounded || groundChecker.isCardGrounded) //touch a different ground or new card
             {
-                PlayerController.moveSpeed -= 3; //move the speed back to normal
+                playerController.changeMoveSpeed(-3); //move the speed back to normal
             }
         }
         
 
     }
 
-    void CheckCard(Collision other) //this function checks which card the player is presently standing on
+    void OnCollisionEnter(Collision other) //this function checks which card the player is presently standing on
     {
         if(other.gameObject.tag == "Red Card")
         {
@@ -97,13 +106,13 @@ public class CardPlatform : MonoBehaviour
     {
         if (cardVal == 0) //checks red
         {
-            HealthManager.curHealth += 1;
-            tempHealth = HealthManager.curHealth;
+            healthManager.curHealth += 1;
+            tempHealth = (int)healthManager.curHealth;
             upgradeAppl = true;
         }
         else //checks black
         {
-            PlayerController.moveSpeed += 3;
+            playerController.changeMoveSpeed(3);
             upgradeAppl = true;
         }
     }
@@ -146,4 +155,3 @@ public class CardPlatform : MonoBehaviour
         Destroy(platPrefab.gameObject);
     }
 }
-*/
