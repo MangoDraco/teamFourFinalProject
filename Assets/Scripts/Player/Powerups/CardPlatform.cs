@@ -17,7 +17,7 @@ public class CardPlatform : MonoBehaviour
     public GroundChecker groundChecker;
     public PlayerController playerController;
     private Vector3 forwardOffset;
-    public float despawnTimer = 5.0f;
+    public float despawnTimer = 7.0f;
     public int cardVal = 0;
     public bool groundUpgrade = false;
     public bool upgradeAppl = false;
@@ -30,7 +30,7 @@ public class CardPlatform : MonoBehaviour
     void Start()
     {
         redBlack = false; //start on black
-        forwardOffset = new Vector3(150, 0, 0);
+        forwardOffset = new Vector3(20, 0, 0);
         canThrow = true;
         
     }
@@ -50,54 +50,53 @@ public class CardPlatform : MonoBehaviour
             throwCd = 2.0f;
         }
 
-        if (!groundChecker.isCardGrounded && groundUpgrade == false) //not on card
+        if (upgradeAppl)
         {
-            if (groundChecker.isCardGrounded ) //on card 
+            if (!groundChecker.isCardGrounded && groundChecker.isGrounded) //erase bonus once you land on something else :3
             {
-                groundUpgrade = true; //upgrade can be put on
-                if(groundUpgrade )
-                {
-                    Upgrade(cardVal); //applies the upgrade
-                    groundUpgrade = false; //upgrade can no longer be put on
-                }
-                
-            }
-            if (!groundChecker.isCardGrounded) //off card
-            {
-                groundUpgrade = false; //upgrade cannot be put on
-            }
-
-            //This controls and manages the health gain
-            if (groundChecker.isGrounded || (groundChecker.isCardGrounded && cardVal == 1)) //touch a different ground or black card
-            {
-                if (upgradeAppl) //upgrade has been applied
-                {
-                    upgradeAppl = false;
-                    if (healthManager.curHealth == tempHealth) //checks if u have not lost the extra hitpoint (true)
-                    {
-                        healthManager.curHealth -= 1; //takes it away
-                    }
-                }
-            }
-
-            if (groundChecker.isGrounded || groundChecker.isCardGrounded) //touch a different ground or new card
-            {
-                //playerController.changeMoveSpeed(-3); //move the speed back to normal
+                EraseBonuses(cardVal);
+                upgradeAppl = false;
             }
         }
-        
+    }
 
+    void EraseBonuses(int cardVal)
+    {
+        switch (cardVal)
+        {
+            case 0:
+                if (healthManager.curHealth == tempHealth) //checks if u have not lost the extra hitpoint (true)
+                {
+                    healthManager.curHealth -= 1; //takes it away
+                }
+                break;
+            case 1:
+                playerController.moveSpeed -= 3;
+                break;
+        }
+        
     }
 
     void OnCollisionEnter(Collision other) //this function checks which card the player is presently standing on
     {
         if(other.gameObject.tag == "Red Card")
         {
-            cardVal = 0;
+            if (groundChecker.isCardGrounded)
+            {
+                cardVal = 0;
+                Upgrade(cardVal);
+                upgradeAppl = true;
+            }
+            
         }
         else if(other.gameObject.tag == "Black Card")
         {
-            cardVal = 1;
+            if (groundChecker.isCardGrounded)
+            {
+                cardVal = 1;
+                Upgrade(cardVal);
+                upgradeAppl = true;
+            }
         }
     }
 
@@ -112,7 +111,7 @@ public class CardPlatform : MonoBehaviour
         }
         else //checks black
         {
-            //playerController.changeMoveSpeed(3);
+            playerController.moveSpeed += 3;
             upgradeAppl = true;
         }
     }
@@ -123,30 +122,30 @@ public class CardPlatform : MonoBehaviour
         if (redOrBlack)
         {
             Instantiate(redPlat, playerPrefab.position + forwardOffset, playerPrefab.rotation);
+            redPlat.transform.Translate(Vector3.forward * 70f * 10f * Time.deltaTime); //forward * distance * speed * time.deltatime (if u want to change it)
             canThrow = false;
             throwCd -= Time.deltaTime;
             despawnTimer -= Time.deltaTime;
             if (despawnTimer > 0)
             {
                 Despawn(redPlat);
-                despawnTimer = 5.0f;
+                despawnTimer = 7.0f;
             }
-            cardVal = 0;
-            //UI shift
+            //UI shift to show the next card
         }
         else
         {
             Instantiate(blackPlat, playerPrefab.position + forwardOffset, playerPrefab.rotation);
+            blackPlat.transform.Translate(Vector3.forward * 70f * 10f * Time.deltaTime); //forward * distance * speed * time.deltatime (if u want to change it)
             canThrow = false;
             throwCd -= Time.deltaTime;
             despawnTimer = Time.deltaTime;
             if (despawnTimer > 0)
             {
                 Despawn(blackPlat);
-                despawnTimer = 5.0f;
+                despawnTimer = 7.0f;
             }
-            cardVal = 1;
-            //UI shift
+            //UI shift to show the next card
         }
     }
 
