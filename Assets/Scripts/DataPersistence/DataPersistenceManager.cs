@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DataPersistenceManager : MonoBehaviour
 {
+    [Header("File Storage Config")]
+    [SerializeField] private string fileName;
+
     private GameData gameData;
+    private List<IDataPersistence> dataPersistenceObjects;
+    private FileDataHandler dataHandler;
 
     public static DataPersistenceManager instance { get; private set; }
 
@@ -19,6 +25,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
 
@@ -29,7 +37,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
-        //TODO - Load saved data from a file using the data handler
+        //Load saved data from a file using the data handler
+        this.gameData = dataHandler.Load();
 
         //If not data can be loaded, initialize new game
         if (this.gameData == null)
@@ -38,18 +47,38 @@ public class DataPersistenceManager : MonoBehaviour
             NewGame();
         }
 
-        //TODO - Push the loaded data to all other scripts that need it
+        //Push the loaded data to all other scripts that need it
+        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        {
+            dataPersistenceObj.LoadData(gameData);
+        }
+
+        Debug.Log("Loaded current health = " + gameData.curHealth);
     }
 
     public void SaveGame()
     {
-        //TODO - pass the data to other scripts so they can update it
+        //Pass the data to other scripts so they can update it
+        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        {
+            dataPersistenceObj.SaveData(ref gameData);
+        }
 
-        //TODO - save that data to a file using the data handler
+        Debug.Log("Saved current health = " + gameData.curHealth);
+
+        //Save that data to a file using the data handler
+        dataHandler.Save(gameData);
     }
 
     private void OnApplicationQuit()
     {
         SaveGame();
+    }
+
+    private List<IDataPersistence> FindAllDataPersistenceObjects()
+    {
+        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
+
+        return new List<IDataPersistence>(dataPersistenceObjects);
     }
 }
