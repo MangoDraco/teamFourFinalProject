@@ -3,7 +3,13 @@ guid: ad0bf01c167ce3f4b8d1460d2f11ea8d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - redPlat: {fileID: 4448883242519955732, guid: 86c7d39aad0b7304dab1131442f33357, type: 3}
+  - blackPlat: {fileID: 6948356405551716497, guid: bc91079aa3f80dc45b22fc614adcad58, type: 3}
+  - playerPrefab: {instanceID: 0}
+  - healthManager: {instanceID: 0}
+  - groundChecker: {instanceID: 0}
+  - playerController: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

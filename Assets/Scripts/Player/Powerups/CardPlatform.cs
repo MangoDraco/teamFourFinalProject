@@ -13,9 +13,9 @@ public class CardPlatform : MonoBehaviour
     public GameObject redPlat; //red platform
     public GameObject blackPlat; //black platform
     public Transform playerPrefab;
-    public HealthManager healthManager;
-    public GroundChecker groundChecker;
-    public PlayerController playerController;
+    HealthManager healthManager;
+    GroundChecker groundChecker;
+    PlayerController playerController;
     private Vector3 forwardOffset;
     public float despawnTimer = 7.0f;
     public int cardVal = 0;
