@@ -82,7 +82,7 @@ public class CardPlatform : MonoBehaviour
 
             if (groundChecker.isGrounded || groundChecker.isCardGrounded) //touch a different ground or new card
             {
-                playerController.changeMoveSpeed(-3); //move the speed back to normal
+                //playerController.changeMoveSpeed(-3); //move the speed back to normal
             }
         }
         
@@ -112,7 +112,7 @@ public class CardPlatform : MonoBehaviour
         }
         else //checks black
         {
-            playerController.changeMoveSpeed(3);
+            //playerController.changeMoveSpeed(3);
             upgradeAppl = true;
         }
     }
