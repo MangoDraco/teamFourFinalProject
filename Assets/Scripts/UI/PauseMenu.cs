@@ -53,4 +53,9 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void OnSaveGameClicked()
+    {
+        DataPersistenceManager.instance.SaveGame();
+    }
+
 }

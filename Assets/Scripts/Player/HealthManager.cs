@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using teamFourFinalProject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
-public class HealthManager : MonoBehaviour
+public class HealthManager : MonoBehaviour, IDataPersistence
 {
     public float maxHealth;
     public float curHealth;
@@ -29,6 +30,16 @@ public class HealthManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.curHealth = data.curHealth;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.curHealth = (int)this.curHealth;
     }
 
     public void TakeDmg(float dmg)
