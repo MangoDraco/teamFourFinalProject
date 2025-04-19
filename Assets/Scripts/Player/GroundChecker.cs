@@ -17,7 +17,7 @@ namespace teamFourFinalProject
         private void Update()
         {
             isGrounded = Physics.SphereCast(origin: transform.position, radius: groundDistance, direction: Vector3.down, out _, groundDistance, (int)groundLayers);
-            isCardGrounded = Physics.SphereCast(origin: transform.position, radius: groundDistance, direction: Vector3.down, out _, groundDistance, (int)cardLayers);
+            isCardGrounded = Physics.SphereCast(origin: transform.position, radius: groundDistance, direction: Vector3.down, out _, groundDistance, cardLayers);
         }
 
         private void OnDrawGizmos()

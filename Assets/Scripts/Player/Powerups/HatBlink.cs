@@ -9,6 +9,7 @@ namespace teamFourFinalProject
     {
         public override void ApplyEffects(PlayerController player)
         {
+            Debug.Log("Applying Hatblink effects");
             player.SetInvulnerable(true);
             player.SetPassThroughEnemies(true);
             //player.DashThrough(true);

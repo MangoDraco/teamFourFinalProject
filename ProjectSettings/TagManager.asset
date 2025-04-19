@@ -10,6 +10,8 @@ TagManager:
   - Deathplane
   - Checkpoint
   - freeLook
+  - Red Card
+  - Black Card
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - Player
   - Enemy
   - HatBlink
-  - 
+  - CardPlatform
   - 
   - 
   - 

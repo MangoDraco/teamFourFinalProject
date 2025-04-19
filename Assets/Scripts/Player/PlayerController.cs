@@ -52,10 +52,13 @@ namespace teamFourFinalProject
 
         [Header("Powerup Settings")]
         [SerializeField] float dashCooldown = 0f;
+        [HideInInspector] public int tempHealth;
+        [HideInInspector] public bool upgradeAppl;
         private PowerupData heldPowerup = null;
         private bool powerupActive = false;
         public Transform player, destination;
         public GameObject playerg;
+        public PowerupData powerupData;
 
         [Header("Camera Controller Settings")]
         [SerializeField] float controllerSensitivity = 300f;
@@ -194,16 +197,25 @@ namespace teamFourFinalProject
 
         void OnPowerup()
         {
-            DashThrough();
+            if (heldPowerup == null) return;
 
-            if (heldPowerup != null && !powerupActive)
-            {
-                HandlePowerup();
-            }
-
-            else if (powerupActive)
+            //HatBlink Behavior
+            if (heldPowerup is HatBlink hatBlinkPowerup)
             {
                 DashThrough();
+            }
+            else if (heldPowerup is CardPowerup cardPowerup)
+            {
+                var thrower = GetComponent<CardPlatform>();
+                if (thrower != null)
+                {
+                    thrower.Throw(cardPowerup.cardVal);
+                }
+            }
+
+            if(!powerupActive)
+            {
+                HandlePowerup();
             }
         }
 
@@ -263,11 +275,14 @@ namespace teamFourFinalProject
             if (powerupActive)
             {
                 heldPowerup.RemoveEffects(this);
-                powerupActive = false;
                 powerupTimer.Stop();
             }
 
             heldPowerup = newPowerup;
+            heldPowerup.ApplyEffects(this);
+            powerupTimer.Reset(heldPowerup.duration);
+            powerupTimer.Start();
+            powerupActive = true;
             Debug.Log($"Picked up powerup: {heldPowerup.name}");
         }
 
@@ -411,11 +426,14 @@ namespace teamFourFinalProject
         }
         void HandlePowerup()
         {
-            heldPowerup.ApplyEffects(this);
-            powerupTimer.Reset(heldPowerup.duration);
-            powerupTimer.Start();
-            powerupActive = true;
-            Debug.Log($"Activated powerup: {heldPowerup.name}");
+            if (!powerupActive)
+            {
+                heldPowerup.ApplyEffects(this);
+                powerupTimer.Reset(heldPowerup.duration);
+                powerupTimer.Start();
+                powerupActive = true;
+                Debug.Log($"Activated powerup: {heldPowerup.name}");
+            }
         }
     }
 }
