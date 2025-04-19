@@ -106,7 +106,7 @@ public class PatrollingEnemy : MonoBehaviour, IStompable
    
     public void PlaySoundOnce(AudioClip clip)
     {
-        audioSource.PlayOneShot(clip);
+        //audioSource.PlayOneShot(clip);
     }
 }
 
