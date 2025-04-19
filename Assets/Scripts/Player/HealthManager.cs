@@ -34,7 +34,7 @@ public class HealthManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.curHealth = data.curHealth;
+        this.curHealth = Mathf.Clamp(data.curHealth, 1, (int)maxHealth);
     }
 
     public void SaveData(ref GameData data)

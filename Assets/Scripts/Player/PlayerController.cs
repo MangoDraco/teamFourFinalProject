@@ -426,7 +426,7 @@ namespace teamFourFinalProject
         }
         void HandlePowerup()
         {
-            if (!powerupActive)
+            if (!powerupActive && heldPowerup != null)
             {
                 heldPowerup.ApplyEffects(this);
                 powerupTimer.Reset(heldPowerup.duration);
