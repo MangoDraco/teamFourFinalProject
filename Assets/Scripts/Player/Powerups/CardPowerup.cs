@@ -72,8 +72,6 @@ namespace teamFourFinalProject
             Vector3 spawnPos = player.transform.position + player.transform.forward * 2f;
             GameObject platToSpawn = cardVal == 0 ? redPlat : blackPlat;
 
-            Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
-
             GameObject platform = GameObject.Instantiate(platToSpawn, spawnPos, Quaternion.identity);
             GameObject.Destroy(platform, despawnTimer);
 
