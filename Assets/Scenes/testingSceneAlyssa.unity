@@ -1774,7 +1774,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8469396832018108390, guid: c108e7012edc942428c465986651d6ff, type: 3}
       propertyPath: cardLayers.m_Bits
-      value: 8192
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8469396832018108390, guid: c108e7012edc942428c465986651d6ff, type: 3}
+      propertyPath: groundLayers.m_Bits
+      value: 8448
       objectReference: {fileID: 0}
     - target: {fileID: 8620209914444162124, guid: c108e7012edc942428c465986651d6ff, type: 3}
       propertyPath: m_Layer
