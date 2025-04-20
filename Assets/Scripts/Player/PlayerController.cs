@@ -59,7 +59,6 @@ namespace teamFourFinalProject
         public Transform player, destination;
         public GameObject playerg;
         public PowerupData powerupData;
-        private PowerupData currentActivePowerup = null;
 
         [Header("Camera Controller Settings")]
         [SerializeField] float controllerSensitivity = 300f;
@@ -94,7 +93,6 @@ namespace teamFourFinalProject
         CountdownTimer attackTimer;
         CountdownTimer powerupTimer;
         CountdownTimer dashCooldownTimer;
-        CountdownTimer throwCooldownTimer;
 
         StateMachine stateMachine;
 
@@ -115,8 +113,6 @@ namespace teamFourFinalProject
             timers = new List<JumpTimer>(capacity: 2) { jumpTimer, jumpCooldownTimer };
             dashCooldownTimer = new CountdownTimer(dashCooldown);
             timers.Add(dashCooldownTimer);
-            throwCooldownTimer = new CountdownTimer(0f);
-            timers.Add(throwCooldownTimer);
 
             //jumpTimer.OnTimerStart =+ () => jumpVelocity = jumpForce;
             //jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
@@ -141,15 +137,13 @@ namespace teamFourFinalProject
 
             powerupTimer.OnTimerStop += () =>
             {
-                if (currentActivePowerup != null)
+                if (heldPowerup != null && powerupActive)
                 {
-                    currentActivePowerup.RemoveEffects(this);
+                    heldPowerup.RemoveEffects(this);
+                    heldPowerup = null;
+                    powerupActive = false;
                     Debug.Log("Powerup ended");
-                    currentActivePowerup = null;
                 }
-
-                heldPowerup = null;
-                powerupActive = false;
             };
         }
 
@@ -203,21 +197,25 @@ namespace teamFourFinalProject
 
         void OnPowerup()
         {
-            if (heldPowerup == null || !powerupActive) return;
+            if (heldPowerup == null) return;
 
             //HatBlink Behavior
-            if (currentActivePowerup is HatBlink)
+            if (heldPowerup is HatBlink hatBlinkPowerup)
             {
                 DashThrough();
             }
-            else if (currentActivePowerup is CardPowerup cardPowerup)
+            else if (heldPowerup is CardPowerup cardPowerup)
             {
-                if (!throwCooldownTimer.isRunning)
+                var thrower = GetComponent<CardPlatform>();
+                if (thrower != null)
                 {
-                    cardPowerup.ThrowPlatform(this);
-                    throwCooldownTimer.Reset(2f);
-                    throwCooldownTimer.Start();
+                    thrower.Throw(cardPowerup.cardVal);
                 }
+            }
+
+            if(!powerupActive)
+            {
+                HandlePowerup();
             }
         }
 
@@ -251,6 +249,7 @@ namespace teamFourFinalProject
 
             HandleAnimator();
             HandleTimers();
+            HandlePowerup();
         }
 
         private void FixedUpdate()
@@ -275,14 +274,16 @@ namespace teamFourFinalProject
         {
             if (powerupActive)
             {
-                currentActivePowerup.RemoveEffects(this);
+                heldPowerup.RemoveEffects(this);
                 powerupTimer.Stop();
-                currentActivePowerup = null;
             }
 
             heldPowerup = newPowerup;
-            HandlePowerup();
-            Debug.Log($"Picked up powerup: {heldPowerup.GetType().Name}");
+            heldPowerup.ApplyEffects(this);
+            powerupTimer.Reset(heldPowerup.duration);
+            powerupTimer.Start();
+            powerupActive = true;
+            Debug.Log($"Picked up powerup: {heldPowerup.name}");
         }
 
         public void HandleJump()
@@ -431,8 +432,6 @@ namespace teamFourFinalProject
                 powerupTimer.Reset(heldPowerup.duration);
                 powerupTimer.Start();
                 powerupActive = true;
-                currentActivePowerup = heldPowerup;
-
                 Debug.Log($"Activated powerup: {heldPowerup.name}");
             }
         }

@@ -6,7 +6,6 @@ using UnityEngine;
 
     public class CardPlatform : MonoBehaviour
     {
-        /*
         // Start is called before the first frame update
         private float throwCd = 2.0f;
         private bool canThrow;
@@ -153,5 +152,5 @@ using UnityEngine;
         {
             yield return new WaitForSeconds(delay);
             Destroy(platPrefab.gameObject);
-        }*/
+        }
     }
