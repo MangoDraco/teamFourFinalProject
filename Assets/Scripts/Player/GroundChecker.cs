@@ -11,6 +11,8 @@ namespace teamFourFinalProject
         [SerializeField] LayerMask groundLayers;
         [SerializeField] LayerMask cardLayers;
 
+        public bool isGrounded {  get; private set; }
+        public bool isCardGrounded { get; private set; }
         public bool IsGrounded => isGrounded || isCardGrounded;
 
         private void Update()

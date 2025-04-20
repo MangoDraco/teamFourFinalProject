@@ -66,5 +66,16 @@ namespace teamFourFinalProject
             }
             Debug.Log("CardPlatform powerup removed");
         }
+
+        public void ThrowPlatform(PlayerController player)
+        {
+            Vector3 spawnPos = player.transform.position + player.transform.forward * 2f;
+            GameObject platToSpawn = cardVal == 0 ? redPlat : blackPlat;
+
+            GameObject platform = GameObject.Instantiate(platToSpawn, spawnPos, Quaternion.identity);
+            GameObject.Destroy(platform, despawnTimer);
+
+            Debug.Log("Platform Thrown!");
+        }
     }
 }
