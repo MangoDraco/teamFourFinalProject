@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CardPlatformPowerup
   m_EditorClassIdentifier: 
   duration: 10
-  redPlat: {fileID: 4002271425728141945, guid: b9756b8d0b683004483c9f81b811a571, type: 3}
-  blackPlat: {fileID: 7217753380257679301, guid: bb4c71800f03c0945a274b52333cf99e, type: 3}
+  redPlat: {fileID: 6068380289108035873, guid: b9756b8d0b683004483c9f81b811a571, type: 3}
+  blackPlat: {fileID: 1644282690356322366, guid: bb4c71800f03c0945a274b52333cf99e, type: 3}
   despawnTimer: 5
   cardVal: 0
