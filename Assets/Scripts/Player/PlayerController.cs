@@ -180,7 +180,7 @@ namespace teamFourFinalProject
         {
             if (!performed) return;
 
-            if (groundChecker.isGrounded)
+            if (groundChecker.IsGrounded)
             {
                 walk.Stop();
                 jump.Play();
@@ -299,14 +299,14 @@ namespace teamFourFinalProject
                 doubleJumpRequested = false;
             }
 
-            else if (!groundChecker.isGrounded)
+            else if (!groundChecker.IsGrounded)
             {
                 walk.Stop();
                 jumpVelocity += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
             }
 
             //If not jumping and grounded, keep jump velocity at 0
-            if (!jumpTimer.isRunning && groundChecker.isGrounded)
+            if (!jumpTimer.isRunning && groundChecker.IsGrounded)
             {
 
                 animator.SetBool("isFalling", false);
@@ -377,7 +377,7 @@ namespace teamFourFinalProject
             animator.SetBool("isWalking", true);
             Vector3 velocity = adjustedDirection * moveSpeed * Time.fixedDeltaTime;
             rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
-            if (!walk.isPlaying && groundChecker.isGrounded)
+            if (!walk.isPlaying && groundChecker.IsGrounded)
             {
                 walk.Play();
             }
