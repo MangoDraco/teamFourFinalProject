@@ -81,7 +81,7 @@ public class EnemyFieldOfView : MonoBehaviour
     // Function for killing the player
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "Cotton")
         {
             Debug.Log("Player is damaged");
         }
@@ -90,7 +90,7 @@ public class EnemyFieldOfView : MonoBehaviour
     // check to see if the player is alive
     void OnTriggerExit(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "Cotton")
         {
             Debug.Log("Player is out of range");
         }
