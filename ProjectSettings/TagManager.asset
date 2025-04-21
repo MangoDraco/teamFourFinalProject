@@ -12,6 +12,7 @@ TagManager:
   - freeLook
   - Red Card
   - Black Card
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Enemy
   - HatBlink
   - CardPlatform
-  - 
+  - Checkpoint
   - 
   - 
   - 
