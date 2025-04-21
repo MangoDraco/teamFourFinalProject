@@ -78,38 +78,42 @@ namespace teamFourFinalProject
         public void ThrowPlatform(PlayerController player)
         {
             Camera cam = Camera.main;
-            Ray ray = new Ray(cam.transform.position, cam.transform.forward); // Center of camera view
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             RaycastHit hit;
 
-            GameObject platToSpawn = cardVal == 0 ? redPlat : blackPlat;
-            Vector3 spawnPos;
-            Quaternion rotation;
-
-            // Check if there's a wall to stick to
+            // Raycast to find the wall or surface to stick to
             if (Physics.Raycast(ray, out hit, 10f, wallLayerMask))
             {
-                spawnPos = hit.point + hit.normal * 0.05f; // Slightly off wall to prevent clipping
-                rotation = Quaternion.LookRotation(-hit.normal);
-                Debug.Log("Platform thrown and aligned to wall surface.");
+                // If we hit something (wall), adjust the spawn position
+                Vector3 spawnPos = hit.point + hit.normal * 0.05f; // Small offset to avoid clipping
+                Quaternion spawnRot = Quaternion.LookRotation(-hit.normal);
+
+                // Instantiate the platform at the adjusted position
+                GameObject platToSpawn = cardVal == 0 ? redPlat : blackPlat;
+                GameObject platform = Instantiate(platToSpawn, spawnPos, spawnRot);
+                Destroy(platform, despawnTimer);
+
+                Debug.Log("Platform thrown and aligned to wall");
             }
             else
             {
-                // No wall hit — place in front of player, using flat camera forward direction
+                // If no wall hit, spawn the platform in front of the player, further away
                 Vector3 flatForward = cam.transform.forward;
-                flatForward.y = 0f;
+                flatForward.y = 0f;  // Keep it on the ground
                 flatForward.Normalize();
 
-                spawnPos = player.transform.position + flatForward * 3f;
-                rotation = Quaternion.LookRotation(-flatForward);
-                Debug.Log("No wall detected. Platform placed in front of player.");
+                // Move the spawn position further away based on the spawnDistance
+                Vector3 spawnPos = player.transform.position + flatForward * spawnDistance;
+
+                Quaternion spawnRot = Quaternion.LookRotation(flatForward);
+
+                // Instantiate the platform
+                GameObject platToSpawn = cardVal == 0 ? redPlat : blackPlat;
+                GameObject platform = Instantiate(platToSpawn, spawnPos, spawnRot);
+                Destroy(platform, despawnTimer);
+
+                Debug.Log("Platform thrown and aligned to flat ground");
             }
-
-            // Instantiate and destroy after timer
-            GameObject platform = GameObject.Instantiate(platToSpawn, spawnPos, rotation);
-            GameObject.Destroy(platform, despawnTimer);
-
-            // Optional: Visual debug line
-            Debug.DrawRay(cam.transform.position, cam.transform.forward * 5f, Color.red, 2f);
         }
 
         public void UpdateGhost(PlayerController player)
@@ -123,17 +127,19 @@ namespace teamFourFinalProject
 
             if (Physics.Raycast(ray, out hit, 10f, wallLayerMask))
             {
+                // Align to wall surface
                 ghostPos = hit.point + hit.normal * 0.05f;
                 ghostRot = Quaternion.LookRotation(-hit.normal);
             }
             else
             {
+                // Align in front of player, slightly offset and on flat ground
                 Vector3 flatForward = cam.transform.forward;
                 flatForward.y = 0f;
                 flatForward.Normalize();
 
-                ghostPos = player.transform.position + flatForward * 3f;
-                ghostRot = Quaternion.LookRotation(-flatForward);
+                ghostPos = player.transform.position + flatForward * spawnDistance;
+                ghostRot = Quaternion.LookRotation(flatForward);
             }
 
             if (activeGhost == null)
@@ -146,7 +152,7 @@ namespace teamFourFinalProject
             activeGhost.transform.position = ghostPos;
             activeGhost.transform.rotation = ghostRot;
 
-            Debug.DrawRay(cam.transform.position, cam.transform.forward * 5f, Color.green, 2f);
+            Debug.DrawRay(ray.origin, ray.direction * 10f, Color.cyan, 1f);
         }
 
         public void HideGhostPreview()
