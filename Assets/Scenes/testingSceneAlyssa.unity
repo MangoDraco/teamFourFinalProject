@@ -1176,10 +1176,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3526083301868898044, guid: b9756b8d0b683004483c9f81b811a571, type: 3}
-      propertyPath: m_ProvidesContacts
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5285578780633973133, guid: b9756b8d0b683004483c9f81b811a571, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.089
@@ -1220,21 +1216,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5558762155287048016, guid: b9756b8d0b683004483c9f81b811a571, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
     - target: {fileID: 6068380289108035873, guid: b9756b8d0b683004483c9f81b811a571, type: 3}
       propertyPath: m_Name
       value: PlatformRed
-      objectReference: {fileID: 0}
-    - target: {fileID: 6068380289108035873, guid: b9756b8d0b683004483c9f81b811a571, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 8782210873967639838, guid: b9756b8d0b683004483c9f81b811a571, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1387,14 +1371,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlatformBlack
       objectReference: {fileID: 0}
-    - target: {fileID: 1644282690356322366, guid: bb4c71800f03c0945a274b52333cf99e, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 2884957368745441950, guid: bb4c71800f03c0945a274b52333cf99e, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4297495720481553396, guid: bb4c71800f03c0945a274b52333cf99e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.23
@@ -1434,10 +1410,6 @@ PrefabInstance:
     - target: {fileID: 4297495720481553396, guid: bb4c71800f03c0945a274b52333cf99e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163420353586067498, guid: bb4c71800f03c0945a274b52333cf99e, type: 3}
-      propertyPath: m_ProvidesContacts
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
