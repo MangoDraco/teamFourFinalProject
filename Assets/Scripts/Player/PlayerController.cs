@@ -218,6 +218,8 @@ namespace teamFourFinalProject
                     throwCooldownTimer.Reset(2f);
                     throwCooldownTimer.Start();
                 }
+
+                cardPowerup.HideGhostPreview();
             }
         }
 
@@ -251,6 +253,11 @@ namespace teamFourFinalProject
 
             HandleAnimator();
             HandleTimers();
+
+            if (heldPowerup is CardPowerup cardPowerup && powerupActive)
+            {
+                cardPowerup.UpdateGhost(this);
+            }
         }
 
         private void FixedUpdate()
