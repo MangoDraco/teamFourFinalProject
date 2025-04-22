@@ -6,16 +6,27 @@ namespace teamFourFinalProject
 {
     public class KeyPickup : MonoBehaviour
     {
-        public string keyID;
+        [SerializeField] KeyData keyData;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                //Add the key to the player's inventory through the KeyManager
-                KeyManager.instance.AddKey(keyID);
+                if (keyData == null)
+                {
+                    Debug.LogError("KeyData is not assigned in the inspector!");
+                    return;
+                }
 
-                //Destroy the key object after pickup (or deactivate it)
+                if (KeyManager.instance == null)
+                {
+                    Debug.LogError("KeyManager.instance is null! Is it placed in the scene?");
+                    return;
+                }
+
+                KeyManager.instance.AddKey(keyData.keyID);
+                Debug.Log("Picked up key: " + keyData.keyID);
+
                 Destroy(gameObject);
             }
         }
