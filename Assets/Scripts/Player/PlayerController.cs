@@ -292,6 +292,20 @@ namespace teamFourFinalProject
             Debug.Log($"Picked up powerup: {heldPowerup.GetType().Name}");
         }
 
+        public void PickupKey(KeyData newKey)
+        {
+            if (!SceneManager.instance.collectedKeyIDs.Contains(newKey.keyID))
+            {
+                SceneManager.instance.collectedKeyIDs.Add(newKey.keyID);
+                Debug.Log($"Picked up key: {newKey.keyID}");
+            }
+
+            else
+            {
+                Debug.Log($"Key {newKey.keyID} is already collected");
+            }
+        }
+
         public void HandleJump()
         {
             if (doubleJumpRequested)

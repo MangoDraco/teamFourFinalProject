@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using teamFourFinalProject;
 using UnityEngine;
 
     [System.Serializable]
     public class GameData
     {
+        public KeyData keyData;
+
         public int curHealth;
         public int playerCheckpoint;
 
         public int currentLevel;
         public int unlockedLevels;
 
-        public bool[] keysCollected;
+        public List<string> collectedKeyIDs;
+        public List<KeyData> keysCollected = new List<KeyData>();
 
         //the values defined in this will be default values for when game loads in
 
@@ -21,6 +25,6 @@ using UnityEngine;
             this.playerCheckpoint = 0; //Checkpoints reached during levels
             this.currentLevel = 0; //HUB
             this.unlockedLevels = 1; //Level 1 is unlocked
-            this.keysCollected = new bool[3]; //3 Keys
+            this.collectedKeyIDs = new List<string>(); //3 Keys
         }
     }

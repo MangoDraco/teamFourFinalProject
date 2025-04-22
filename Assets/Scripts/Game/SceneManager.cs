@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using teamFourFinalProject;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour, IDataPersistence
@@ -10,8 +12,8 @@ public class SceneManager : MonoBehaviour, IDataPersistence
 
     public int currentLevel = 0;
     public int unlockedLevels = 1;
-    public bool[] keysCollected = new bool[3];
 
+    public List<string> collectedKeyIDs = new List<string>();
 
     private void OnDisable()
     {
@@ -36,6 +38,11 @@ public class SceneManager : MonoBehaviour, IDataPersistence
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
+    public void LoadLevel(string sceneName)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
     public void LoadLevel(int levelIndex)
     {
         if (levelIndex < unlockedLevels)
@@ -50,37 +57,9 @@ public class SceneManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void CompleteLevel(int levelIndex)
-    {
-        if (levelIndex < keysCollected.Length)
-        {
-            keysCollected[levelIndex] = true;
-
-            if (unlockedLevels < levelIndex + 2 && levelIndex + 1 < keysCollected.Length)
-            {
-                unlockedLevels = levelIndex + 2;
-            }
-
-            if (AllKeysCollected())
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("youWin");
-            }
-
-            else
-            {
-                LoadLevel(0); //Return to HUB
-            }
-        }
-    }
-
     public bool AllKeysCollected()
     {
-        foreach (bool collected in keysCollected)
-        {
-            if (!collected) return false;
-        }
-
-        return true;
+        return collectedKeyIDs.Count >= 4;
     }
 
     public void QuitGame()
@@ -101,13 +80,24 @@ public class SceneManager : MonoBehaviour, IDataPersistence
     {
         currentLevel = data.currentLevel;
         unlockedLevels = data.unlockedLevels;
-        keysCollected = data.keysCollected ?? new bool[3];
+        collectedKeyIDs = new List<string>(data.collectedKeyIDs ?? new List<string>());
     }
 
     public void SaveData(ref GameData data)
     {
         data.currentLevel = currentLevel;
         data.unlockedLevels = unlockedLevels;
-        data.keysCollected = keysCollected;
+        data.collectedKeyIDs = new List<string>(collectedKeyIDs);
+    }
+
+    public void CompleteLevel(KeyData keyData)
+    {
+        if (keyData != null && !collectedKeyIDs.Contains(keyData.keyID))
+        {
+            collectedKeyIDs.Add(keyData.keyID);
+            Debug.Log("Collected key: " + keyData.keyID);
+        }
+
+        LoadLevel("Hub"); // After completing the level, return to the hub
     }
 }

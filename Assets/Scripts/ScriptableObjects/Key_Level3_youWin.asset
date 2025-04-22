@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9acce5aa5293d204d93f4b607b42950e, type: 3}
-  m_Name: CardPlatform
+  m_Script: {fileID: 11500000, guid: b221e39084c8621469d77ddb3a35bde0, type: 3}
+  m_Name: Key_Level3_youWin
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  score: 0
+  keyID: key3
+  levelName: youWin

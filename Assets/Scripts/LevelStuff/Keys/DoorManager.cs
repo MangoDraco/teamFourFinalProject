@@ -1,39 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using teamFourFinalProject;
 using UnityEngine;
 
 public class DoorManager : MonoBehaviour, IDataPersistence
 {
-    public int requiredKeyIndex;
-    private bool keyOwned = false;
+    public static SceneManager instance;
+
+    public KeyData requiredKey;
+    private KeyManager keyManager;
 
     public GameObject lockedDoorVisual;
     public GameObject unlockedDoorVisual;
 
+    private bool keyOwned = false;
+
+
+    void Start()
+    {
+        keyManager = FindObjectOfType<KeyManager>();
+
+        if (keyManager == null)
+        {
+            Debug.LogError("Key manager not found");
+        }
+    }
+
     public void LoadData(GameData data)
     {
-        keyOwned = data.keysCollected[requiredKeyIndex];
-
-        if (keyOwned)
-        {
-            lockedDoorVisual.SetActive(false);
-            unlockedDoorVisual.SetActive(true);
-        }
-
-        else
-        {
-            lockedDoorVisual.SetActive(true);
-            unlockedDoorVisual.SetActive(false);
-        }
+        keyOwned = data.keysCollected.Contains(requiredKey);
+        
+        lockedDoorVisual.SetActive(!keyOwned);
+        unlockedDoorVisual.SetActive(keyOwned);
     }
 
     public void SaveData(ref GameData data) { }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (keyOwned && other.CompareTag("Player"))
+        if (other.CompareTag("Player") && keyManager != null)
         {
-            SceneManager.instance.LoadLevel(requiredKeyIndex + 1); //Assuming HUB is 0
+            if (SceneManager.instance.collectedKeyIDs.Contains(requiredKey.keyID))
+            {
+                SceneManager.instance.LoadLevel(requiredKey.levelName);
+            }
+
+            else
+            {
+                Debug.LogWarning("Player does not have the required key");
+            }
         }
     }
 }

@@ -1,38 +1,58 @@
-using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class KeyManager : MonoBehaviour, IDataPersistence
+namespace teamFourFinalProject
 {
-    //Attach to keys!
-
-    public int keyIndex;
-
-    private bool collected = false;
-
-    public void LoadData(GameData data)
+    public class KeyManager : MonoBehaviour, IDataPersistence
     {
-        collected = data.keysCollected[keyIndex];
-        if (collected)
+        public static KeyManager instance;
+        public List<string> collectedKeys = new List<string>();
+
+        private void Awake()
         {
-            gameObject.SetActive(false);
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-    }
 
-    public void SaveData(ref GameData data)
-    {
-        data.keysCollected[keyIndex] = collected;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!collected && other.CompareTag("Player"))
+        public void AddKey(string keyID)
         {
-            collected = true;
-            gameObject.SetActive(false);
-            Debug.Log("Collected key " + keyIndex);
+            if (!collectedKeys.Contains(keyID))
+            {
+                collectedKeys.Add(keyID);
+                Debug.Log($"Collected key: {keyID}");
+            }
+            else
+            {
+                Debug.Log($"Key {keyID} is already collected.");
+            }
+        }
 
-            DataPersistenceManager.instance.SaveGame();
+        public bool HasKey(string keyID)
+        {
+            return collectedKeys.Contains(keyID);
+        }
+
+        public void SaveData(ref GameData data)
+        {
+            data.keysCollected.Clear();
+            data.keysCollected.AddRange(collectedKeys); 
+        }
+
+        public void LoadData(GameData data)
+        {
+            collectedKeys.Clear();
+            if (data != null && data.keysCollected != null)
+            {
+                collectedKeys.AddRange(data.keysCollected);
+            }
         }
     }
 }
