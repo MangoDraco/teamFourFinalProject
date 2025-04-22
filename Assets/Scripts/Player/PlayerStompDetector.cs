@@ -6,24 +6,22 @@ namespace teamFourFinalProject
 {
     public class PlayerStompDetector : MonoBehaviour
     {
-        public float stompBounceForce = 12f;
+        public float stompBounceForce = 25f;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Enemy"))
+            IStompable stompable = other.GetComponentInParent<IStompable>();
+            if (stompable != null)
             {
                 Rigidbody rb = GetComponentInParent<Rigidbody>();
                 if (rb != null && rb.velocity.y < 0f)
                 {
-                    IStompable stompable = other.GetComponent<IStompable>();
-                    if (stompable != null)
-                    {
-                        stompable.Die();
-                    }
-                }
+                    //Bounce
+                    rb.velocity = new Vector3(rb.velocity.x, stompBounceForce, rb.velocity.z);
 
-                //Bounce
-                rb.velocity = new Vector3(rb.velocity.x, stompBounceForce, rb.velocity.z);
+                    stompable.OnStomped();
+                    stompable.Die();
+                }
             }
         }
     }

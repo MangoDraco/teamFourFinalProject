@@ -62,15 +62,15 @@ public class PatrollingEnemy : MonoBehaviour, IStompable
     }
 
     //functions from iStompable
-    void IStompable.Die()
+    public void Die()
     {
         Destroy(gameObject);
     }
 
-    void IStompable.OnStomped()
+    public void OnStomped()
     {
-        //instantiate vfx (when we add that in)
-        //PlaySoundOnce(stomped);
+        //VFX for stomped
+        Debug.Log("Stomped");
     }
 
     void soundSpeedController()

@@ -51,7 +51,8 @@ public class SeekingEnemy : MonoBehaviour, IStompable
 
     public void OnStomped()
     {
-
+        //VFX for stomped
+        Debug.Log("Stomped");
     }
 
 }

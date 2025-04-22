@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingEnemy : MonoBehaviour
+public class FlyingEnemy : MonoBehaviour, IStompable
 {
     public Transform player;
 
@@ -80,7 +80,8 @@ public class FlyingEnemy : MonoBehaviour
 
     public void OnStomped()
     {
-
+        //VFX for stomped
+        Debug.Log("Stomped");
     }
 
 }
