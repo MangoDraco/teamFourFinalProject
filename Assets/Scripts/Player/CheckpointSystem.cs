@@ -5,6 +5,8 @@ using UnityEngine;
 public class CheckpointSystem : MonoBehaviour
 {
     public Transform[] checkpoints;
+    public gameOverToggle toggle;
+    public GameObject playerPrefab;
     public static Transform respawnPoint; //do not put anything in from the editor
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,16 @@ public class CheckpointSystem : MonoBehaviour
                     respawnPoint = checkpoints[i];
                 }
             }
+        }
+    }
+    void Update()
+    {
+        if(toggle.deadFlag)
+        {
+            Debug.Log("Resetting Spawnpoint");
+            respawnPoint = checkpoints[0].transform;
+            playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
+            toggle.deadFlag = false;
         }
     }
 }

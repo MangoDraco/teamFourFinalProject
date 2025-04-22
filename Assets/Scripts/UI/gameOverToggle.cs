@@ -9,6 +9,7 @@ public class gameOverToggle : MonoBehaviour
     public GameObject button;
     public Button buttonPress;
     public bool bgFlag;
+    public bool deadFlag;
     public HealthManager healthManager;
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class gameOverToggle : MonoBehaviour
         
         if (healthManager.dead == true)
         {
-            Debug.Log("I am showing the button");
+            
             bgFlag = true;
             button.SetActive(true);
             buttonPress.onClick.AddListener(OnButtonClick);
@@ -39,6 +40,7 @@ public class gameOverToggle : MonoBehaviour
         buttonPress.onClick.RemoveListener(OnButtonClick);
         button.SetActive(false);
         bgFlag = false;
+        deadFlag = true;
         UnityEngine.Cursor.visible = false;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }

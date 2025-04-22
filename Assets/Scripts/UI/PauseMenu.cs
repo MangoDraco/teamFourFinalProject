@@ -28,8 +28,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
     }
 
     public void Resume()
@@ -37,14 +37,16 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
     }
 
     public void MainMenu()
     {
         //SceneManager.LoadScene(0);
         Time.timeScale = 1f;
+        pauseMenuUI.SetActive(false);
+        GameIsPaused = false;
     }
 
     public void ExitGame()

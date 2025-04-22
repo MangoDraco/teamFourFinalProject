@@ -1111,7 +1111,7 @@ MonoBehaviour:
   playerRef: {fileID: 0}
   targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1024
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128
@@ -1128,9 +1128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a6b5a508fbb224eb31c4ca05a1d08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
+  agent: {fileID: 172507594472331727}
   range: 10
-  centrePoint: {fileID: 0}
+  centrePoint: {fileID: 3116971709450802043}
 --- !u!65 &5932002277256114712
 BoxCollider:
   m_ObjectHideFlags: 0

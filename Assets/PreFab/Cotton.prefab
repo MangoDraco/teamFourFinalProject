@@ -830,7 +830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  unlockedLevels: 1
+  unlockedLevels: 3
   keysCollected: 000000
 --- !u!114 &1717124121550790933
 MonoBehaviour:
@@ -850,6 +850,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  toggle: {fileID: 0}
+  playerPrefab: {fileID: 2576308976697182822}
 --- !u!81 &8658057436031711839
 AudioListener:
   m_ObjectHideFlags: 0

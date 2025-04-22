@@ -12,6 +12,7 @@ public class HealthManager : MonoBehaviour, IDataPersistence
 {
     public float maxHealth;
     public float curHealth;
+    private int maxLives = 3;
     private int lives;
     public TextMeshProUGUI livesText;
     public bool dead;
@@ -63,26 +64,27 @@ public class HealthManager : MonoBehaviour, IDataPersistence
 
     public void Death()
     {
-        if(lives <= 0)
+        if(lives > 0)
+        {
+            lives = lives - 1;
+            livesText.text = "x" + lives;
+            curHealth = maxHealth;
+            OnPlayerDamaged?.Invoke();
+            playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
+        }
+        else
         {
             Debug.Log(dead);
             dead = true;
             Debug.Log(dead);
             playerPrefab.SetActive(false);
         }
-        else
-        {
-            curHealth = maxHealth;
-            playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
-        }
         
     }
 
     public void MapDeath()
     {
-         playerPrefab.SetActive(false);
-         curHealth -= 1;
-        dead = true;
+            Death();
     }
 
     public void Respawn()
@@ -90,7 +92,10 @@ public class HealthManager : MonoBehaviour, IDataPersistence
         if (dead)
         {
             curHealth = maxHealth;
+            livesText.text = "x" + lives;
+            lives = maxLives;
         }
+        livesText.text = "x" + lives;
         dead = false;
         OnPlayerDamaged?.Invoke();
         playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
@@ -106,6 +111,7 @@ public class HealthManager : MonoBehaviour, IDataPersistence
         else
         {
             curHealth += 1;
+            OnPlayerDamaged?.Invoke();
             return true;
         }
     }
