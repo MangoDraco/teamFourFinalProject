@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KeyCollection : MonoBehaviour
 {
-    [SerializeField] string playerTag = "Player";
+    /*[SerializeField] string playerTag = "Player";
     public SceneManager sceneManager;
     private void OnTriggerEnter(Collider other)
     {
@@ -14,5 +14,5 @@ public class KeyCollection : MonoBehaviour
             
         }
         
-    }
+    }*/
 }

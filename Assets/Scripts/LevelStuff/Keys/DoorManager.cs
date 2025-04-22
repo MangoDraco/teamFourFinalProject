@@ -28,7 +28,7 @@ public class DoorManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        keyOwned = data.keysCollected.Contains(requiredKey);
+        keyOwned = keyManager.HasKey(requiredKey.keyID);
         
         lockedDoorVisual.SetActive(!keyOwned);
         unlockedDoorVisual.SetActive(keyOwned);
@@ -40,14 +40,14 @@ public class DoorManager : MonoBehaviour, IDataPersistence
     {
         if (other.CompareTag("Player") && keyManager != null)
         {
-            if (SceneManager.instance.collectedKeyIDs.Contains(requiredKey.keyID))
+            if (keyManager.HasKey(requiredKey.keyID))
             {
                 SceneManager.instance.LoadLevel(requiredKey.levelName);
             }
 
             else
             {
-                Debug.LogWarning("Player does not have the required key" + requiredKey.keyID);
+                Debug.LogWarning($"Player does not have the required key: {requiredKey.keyID}. Current keys: {string.Join(", ", keyManager.collectedKeys)}");
             }
         }
     }

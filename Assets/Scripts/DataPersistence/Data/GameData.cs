@@ -15,7 +15,7 @@ using UnityEngine;
         public int unlockedLevels;
 
         public List<string> collectedKeyIDs;
-        public List<KeyData> keysCollected = new List<KeyData>();
+        public List<string> keysCollected = new List<string>();
 
         //the values defined in this will be default values for when game loads in
 
@@ -25,6 +25,6 @@ using UnityEngine;
             this.playerCheckpoint = 0; //Checkpoints reached during levels
             this.currentLevel = 0; //HUB
             this.unlockedLevels = 1; //Level 1 is unlocked
-            this.collectedKeyIDs = new List<string>(); //3 Keys
+            this.collectedKeyIDs = new List<string>(); //4 Keys
         }
     }
