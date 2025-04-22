@@ -47,7 +47,7 @@ public class DoorManager : MonoBehaviour, IDataPersistence
 
             else
             {
-                Debug.LogWarning("Player does not have the required key");
+                Debug.LogWarning("Player does not have the required key" + requiredKey.keyID);
             }
         }
     }

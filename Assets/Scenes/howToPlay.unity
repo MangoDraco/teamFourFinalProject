@@ -422,7 +422,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: level1
+          m_StringArgument: Hub
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &402164466
@@ -588,6 +588,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8f50e9e67579e4fa038e7415f6e60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 0
+  unlockedLevels: 1
+  collectedKeyIDs: []
 --- !u!1 &531836949
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +923,7 @@ MonoBehaviour:
     Jump:  A button
 
     Hat
-    blink: X button
+    blink/Card Summon: X button
 
 
 '
@@ -1325,8 +1328,10 @@ MonoBehaviour:
 
     Jump:  Spacebar
 
-    Hat blink: Q when
-    available
+    Hat blink/Card
+    Summon: Q when available
+
+    Pause: P
 
 
 '
@@ -1392,7 +1397,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -180.49457, y: 0, z: 0, w: 0}
+  m_margin: {x: -180.49457, y: 0, z: -34.60199, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
