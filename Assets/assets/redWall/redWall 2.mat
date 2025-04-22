@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: marble
+  m_Name: redWall 2
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -27,7 +27,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: be49abd0765010440b2432b39d58440b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8af36365c736d6848931a58947853135, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -47,19 +47,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ccbadd650d09d1142ad049168dcda6a3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5d40f0e95ced4a74abd3d92bafc44a53, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 41a28160c174a42448e4256499f93c0a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5e4f52f87fd752443b9d25e91a056f47, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 1219ecfcc3e454c46a2c1d7119fdc426, type: 3}
+        m_Texture: {fileID: 2800000, guid: 60c94ed45027c164abfed6c5cf3b84be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 833a313177ac82d49b7c6e339b2e4ab0, type: 3}
+        m_Texture: {fileID: 2800000, guid: ecbe5f61b3f691e48a4384308227e18c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -68,7 +68,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlossMapScale: 0.61
+    - _GlossMapScale: 0
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
@@ -81,6 +81,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.2578616, g: 0.2473201, b: 0.2473201, a: 1}
+    - _Color: {r: 0.72955966, g: 0.72955966, b: 0.72955966, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
