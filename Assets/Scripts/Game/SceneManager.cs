@@ -12,6 +12,12 @@ public class SceneManager : MonoBehaviour, IDataPersistence
     public int unlockedLevels = 1;
     public bool[] keysCollected = new bool[3];
 
+
+    private void OnDisable()
+    {
+        Debug.Log("");
+
+    }
     private void Awake()
     {
         if (instance == null)
@@ -22,7 +28,7 @@ public class SceneManager : MonoBehaviour, IDataPersistence
 
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
     public void LoadNextScene(string sceneName)

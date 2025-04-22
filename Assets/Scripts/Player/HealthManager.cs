@@ -6,11 +6,14 @@ using teamFourFinalProject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class HealthManager : MonoBehaviour, IDataPersistence
 {
     public float maxHealth;
     public float curHealth;
+    private int lives;
+    public TextMeshProUGUI livesText;
     public bool dead;
     public GameObject playerPrefab; //add the player in :3
     // Start is called before the first frame update
@@ -22,7 +25,9 @@ public class HealthManager : MonoBehaviour, IDataPersistence
     void Start()
     {
         curHealth = maxHealth;
-        
+        lives = 3;
+        livesText.text = "x" + lives;
+
 
     }
 
@@ -58,16 +63,26 @@ public class HealthManager : MonoBehaviour, IDataPersistence
 
     public void Death()
     {
-        Debug.Log(dead);
-        dead = true;
-        Debug.Log(dead);
-        playerPrefab.SetActive(false);
+        if(lives <= 0)
+        {
+            Debug.Log(dead);
+            dead = true;
+            Debug.Log(dead);
+            playerPrefab.SetActive(false);
+        }
+        else
+        {
+            curHealth = maxHealth;
+            playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
+        }
+        
     }
 
     public void MapDeath()
     {
          playerPrefab.SetActive(false);
          curHealth -= 1;
+        dead = true;
     }
 
     public void Respawn()
