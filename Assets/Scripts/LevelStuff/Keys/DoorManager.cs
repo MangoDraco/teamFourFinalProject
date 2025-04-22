@@ -26,6 +26,11 @@ public class DoorManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    void Update()
+    {
+        UpdateDoorVisual();
+    }
+
     public void LoadData(GameData data)
     {
         keyOwned = keyManager.HasKey(requiredKey.keyID);
@@ -50,5 +55,12 @@ public class DoorManager : MonoBehaviour, IDataPersistence
                 Debug.LogWarning($"Player does not have the required key: {requiredKey.keyID}. Current keys: {string.Join(", ", keyManager.collectedKeys)}");
             }
         }
+    }
+
+    private void UpdateDoorVisual()
+    {
+        keyOwned = keyManager.HasKey(requiredKey.keyID);
+        lockedDoorVisual.SetActive(!keyOwned);
+        unlockedDoorVisual.SetActive(keyOwned);
     }
 }
