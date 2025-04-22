@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerupPickup : MonoBehaviour
 {
-    public PlayerController.PowerupType powerupType;
+    //public PlayerController.PowerupType powerupType;  For revised player controller
 
     private void OnTriggerEnter(Collider other)
     {

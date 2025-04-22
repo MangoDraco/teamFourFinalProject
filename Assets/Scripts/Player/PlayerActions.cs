@@ -1077,10 +1077,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Fire;
-    public struct PlayerActions
+    public struct _PlayerActions
     {
         private @PlayerActions m_Wrapper;
-        public PlayerActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public _PlayerActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @MouseControlCamera => m_Wrapper.m_Player_MouseControlCamera;
@@ -1094,7 +1094,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(PlayerActions set) => set.Get();
         public void AddCallbacks(IPlayerActions instance)
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
