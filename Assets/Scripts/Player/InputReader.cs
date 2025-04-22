@@ -1,95 +1,106 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using static PlayerActions;
+using static PlayerInputActions;
 
-public class InputReader : ScriptableObject, IPlayerActions
+namespace teamFourFinalProject
 {
-    public event UnityAction<Vector2> Move = delegate { };
-    public event UnityAction<Vector2, bool> Look = delegate { };
-    public event UnityAction EnableMouseControlCamera = delegate { };
-    public event UnityAction DisableMouseControlCamera = delegate { };
+    [CreateAssetMenu(fileName = "InputReader", menuName = "Platformer/InputReader")]
 
-    PlayerActions inputActions;
-
-    public Vector3 Direction => inputActions.Player.Move.ReadValue<Vector2>();
-
-    void OnEnable()
+    public class InputReader : ScriptableObject, IPlayerActions
     {
-        if (inputActions == null)
+        public event UnityAction<Vector2> Move = delegate { };
+        public event UnityAction<Vector2, bool> Look = delegate { };
+        public event UnityAction EnableMouseControlCamera = delegate { };
+        public event UnityAction DisableMouseControlCamera = delegate { };
+        public event UnityAction<bool> Jump = delegate { };
+        public event UnityAction ActivatePowerup = delegate { };
+
+        PlayerInputActions inputActions;
+
+        public Vector3 Direction => (Vector3)inputActions.Player.Move.ReadValue<Vector2>();
+
+        void OnEnable()
         {
-            inputActions = new PlayerActions();
-            inputActions.Player.SetCallbacks(instance: this);
+            if (inputActions == null)
+            {
+                inputActions = new PlayerInputActions();
+                inputActions.Player.SetCallbacks(instance: this);
+            }
         }
-        inputActions.Enable();
-    }
 
-    void PlayerActions.IPlayerActions.OnMove(InputAction.CallbackContext context)
-    {
-        Move.Invoke(arg0: context.ReadValue<Vector2>());
-    }
-
-    void PlayerActions.IPlayerActions.OnRun(InputAction.CallbackContext context)
-    {
-        //noop
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        Look.Invoke(context.ReadValue<Vector2>(), IsDeviceMouse(context));
-    }
-
-    bool IsDeviceMouse(InputAction.CallbackContext context) => context.control.device.name == "Mouse";
-
-    public void OnMouseControlCamera(InputAction.CallbackContext context)
-    {
-        switch (context.phase)
+        public void EnablePlayerActions()
         {
-            case InputActionPhase.Started:
-                EnableMouseControlCamera.Invoke();
-                break;
-            case InputActionPhase.Canceled:
-                DisableMouseControlCamera.Invoke();
-                break;
+            inputActions.Enable();
         }
-    }
 
-    void PlayerActions.IPlayerActions.OnFire(InputAction.CallbackContext context)
-    {
-        //noop
-    }
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            Move.Invoke(arg0: context.ReadValue<Vector2>());
+        }
 
-    void PlayerActions.IPlayerActions.OnInteract(InputAction.CallbackContext context)
-    {
-        //noop
-    }
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            Look.Invoke(context.ReadValue<Vector2>(), IsDeviceMouse(context));
+        }
 
-    void PlayerActions.IPlayerActions.OnJump(InputAction.CallbackContext context)
-    {
-        //noop
-    }
+        bool IsDeviceMouse(InputAction.CallbackContext context) => context.control.device.name == "Mouse";
 
-    void PlayerActions.IPlayerActions.OnMenu(InputAction.CallbackContext context)
-    {
-        //noop
-    }
+        public void OnMouseControlCamera(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    EnableMouseControlCamera.Invoke();
+                    break;
+                case InputActionPhase.Canceled:
+                    DisableMouseControlCamera.Invoke();
+                    break;
+            }
+        }
 
-    void PlayerActions.IPlayerActions.OnPowerup(InputAction.CallbackContext context)
-    {
-        //noop
-    }
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            //noop
+        }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            //noop
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    Jump.Invoke(arg0: true);
+                    break;
+                case InputActionPhase.Canceled:
+                    Jump.Invoke(arg0: false);
+                    break;
+            }
+        }
+
+        public void OnMenu(InputAction.CallbackContext context)
+        {
+            //noop
+        }
+
+        public void OnPowerup(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Started)
+            {
+                ActivatePowerup.Invoke();
+            }
+        }
+
+        public void OnRun(InputAction.CallbackContext context)
+        {
+            //noop
+        }
     }
 }

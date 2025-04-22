@@ -10,7 +10,7 @@ using static System.IO.Path;
 using static UnityEditor.AssetDatabase;
 using System.IO;
 
-public class Setup : MonoBehaviour
+public static class Setup
 {
     [MenuItem("Tools/Setup/Create Default Folders")]
     public static void CreateDefaultFolders()

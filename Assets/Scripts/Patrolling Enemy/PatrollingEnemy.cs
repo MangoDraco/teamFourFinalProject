@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Apple;
 
-public class PatrollingEnemy : MonoBehaviour
+public class PatrollingEnemy : MonoBehaviour, IStompable
 {
 
     private Rigidbody rB;   
@@ -24,6 +24,7 @@ public class PatrollingEnemy : MonoBehaviour
     //enemy sound variables
     AudioSource audioSource;
     public AudioClip footstepsWalk;
+    public AudioClip stomped;
     private bool walking;
 
 
@@ -58,6 +59,18 @@ public class PatrollingEnemy : MonoBehaviour
             SetPosition();
         }
 
+    }
+
+    //functions from iStompable
+    void IStompable.Die()
+    {
+        Destroy(gameObject);
+    }
+
+    void IStompable.OnStomped()
+    {
+        //instantiate vfx (when we add that in)
+        //PlaySoundOnce(stomped);
     }
 
     void soundSpeedController()

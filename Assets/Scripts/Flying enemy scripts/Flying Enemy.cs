@@ -15,18 +15,23 @@ public class FlyingEnemy : MonoBehaviour
     public float enemySpeed;
     bool CanShoot;
 
+    public void Start()
+    {
+       
+    }
 
     private void Update()
     {
         if(CanShoot == true)
         {
             ShootAtPlayer();
+            FirstShotDelay();
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "Cotton")
         {
             Debug.Log("Player Detected Firing");
             CanShoot = true;
@@ -35,29 +40,47 @@ public class FlyingEnemy : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "Cotton")
         {
             Debug.Log("Player Out of Range");
             CanShoot = false;
         }
     }
 
+    public void FirstShotDelay()
+    {
+        delay -= Time.deltaTime;
+        delay = 2;
+    }
+
     void ShootAtPlayer()
     {
-        delay = 2;
-        bulletTime -= Time.deltaTime;
+        bulletTime -= Time.deltaTime; //decrease bullet time
 
         if(bulletTime > 0 + delay)
         {
             return;
         }
 
-        bulletTime = timer;
+        bulletTime = timer; //bullets lifetime
 
-        GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
+        GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject; //spawning the projectile
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-        bulletRig.AddForce(bulletRig.transform.forward * enemySpeed);
+        if (delay > 0)
+        {
+            bulletRig.AddForce(bulletRig.transform.forward * enemySpeed); //shooting the projectile
+        }
         Destroy(bulletObj, 5f);
-;    }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    public void OnStomped()
+    {
+
+    }
 
 }

@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MovingPlatform
+  - WeakPoint
+  - Enemy
+  - Deathplane
+  - Checkpoint
+  - freeLook
   layers:
   - Default
   - TransparentFX
@@ -13,11 +19,11 @@ TagManager:
   - UI
   - Target
   - Obstruction
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Walls
+  - Player
+  - Enemy
+  - HatBlink
   - 
   - 
   - 
