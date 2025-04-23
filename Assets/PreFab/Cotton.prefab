@@ -652,6 +652,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4604540424721767667}
+  - component: {fileID: 5510351134809050103}
   - component: {fileID: 8021968574919573235}
   - component: {fileID: 8469396832018108390}
   - component: {fileID: 5280317583415507202}
@@ -689,6 +690,21 @@ Transform:
   - {fileID: 8387395016811740089}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5510351134809050103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576308976697182822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c722e1134598d2f49895d9be0fe00714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 2893755227269318327}
+  targetTime: 2
+  maxTime: 2
 --- !u!114 &8021968574919573235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,10 +841,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   curHealth: 5
+  invinc: 0
   livesText: {fileID: 0}
   dead: 0
   playerPrefab: {fileID: 2576308976697182822}
   sceneManager: {fileID: 4235464199744251748}
+  hurtboxTimer: {fileID: 5510351134809050103}
   hurt: {fileID: 454929277130185600}
   hurtSound: {fileID: 8300000, guid: d99ec4764bc578846a31be2cd40b0ac0, type: 3}
 --- !u!114 &4235464199744251748

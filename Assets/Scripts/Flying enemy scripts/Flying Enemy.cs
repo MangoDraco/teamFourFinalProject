@@ -75,6 +75,7 @@ public class FlyingEnemy : MonoBehaviour, IStompable
 
     public void Die()
     {
+        Debug.LogWarning("I died");
         Destroy(gameObject);
     }
 

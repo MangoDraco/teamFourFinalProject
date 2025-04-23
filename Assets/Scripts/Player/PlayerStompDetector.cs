@@ -7,6 +7,8 @@ namespace teamFourFinalProject
     public class PlayerStompDetector : MonoBehaviour
     {
         public float stompBounceForce = 25f;
+        
+        
 
         private void OnTriggerEnter(Collider other)
         {
@@ -20,6 +22,7 @@ namespace teamFourFinalProject
                     rb.velocity = new Vector3(rb.velocity.x, stompBounceForce, rb.velocity.z);
 
                     stompable.OnStomped();
+                    Debug.Log(other);
                     stompable.Die();
                 }
             }

@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1661966856534058231}
   - component: {fileID: 3376236574906225748}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: KillBox
   m_TagString: Enemy
   m_Icon: {fileID: 0}

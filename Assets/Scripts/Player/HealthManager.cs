@@ -12,6 +12,7 @@ public class HealthManager : MonoBehaviour, IDataPersistence
 {
     public float maxHealth;
     public float curHealth;
+    public bool invinc;
     private int maxLives = 3;
     private int lives;
     public TextMeshProUGUI livesText;
@@ -21,6 +22,7 @@ public class HealthManager : MonoBehaviour, IDataPersistence
     public static event Action OnPlayerDamaged;
     public static event Action OnPlayerDeath;
     [SerializeField] SceneManager sceneManager;
+    [SerializeField] hurtboxTimer hurtboxTimer;
     [SerializeField] AudioSource hurt;
     [SerializeField] AudioClip hurtSound;
     void Start()
@@ -50,16 +52,22 @@ public class HealthManager : MonoBehaviour, IDataPersistence
 
     public void TakeDmg(float dmg)
     {
-        curHealth -= dmg;
-        hurt.Play();
-        OnPlayerDamaged?.Invoke();
-        if (curHealth <= 0)
+        if (!invinc)
         {
-            curHealth = 0;
-            OnPlayerDeath?.Invoke();
-            Death();
-            
+            hurtboxTimer.ResetTimer();
+            curHealth -= dmg;
+            hurt.Play();
+            OnPlayerDamaged?.Invoke();
+            if (curHealth <= 0)
+            {
+                curHealth = 0;
+                OnPlayerDeath?.Invoke();
+                Death();
+
+            }
         }
+        
+        
     }
 
     public void Death()
@@ -81,7 +89,7 @@ public class HealthManager : MonoBehaviour, IDataPersistence
         }
         
     }
-
+    
     public void MapDeath()
     {
             Death();
@@ -135,7 +143,11 @@ public class HealthManager : MonoBehaviour, IDataPersistence
     {
         if (other.gameObject.tag == "Deathplane")
         {
-            MapDeath();
+            invinc = false;
+            TakeDmg(1);
+            playerPrefab.SetActive(false);
+            playerPrefab.transform.position = CheckpointSystem.respawnPoint.position;
+            playerPrefab.SetActive(true);
         }
 
     }
