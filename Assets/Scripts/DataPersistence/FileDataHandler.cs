@@ -70,4 +70,14 @@ public class FileDataHandler
             Debug.LogError("Error occured when trying to save data to file: " + fullPath + "\n" + e);
         }
     }
+
+    public void DeleteSaveFile()
+    {
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+            Debug.Log("Save file deleted: " + fullPath);
+        }
+    }
 }

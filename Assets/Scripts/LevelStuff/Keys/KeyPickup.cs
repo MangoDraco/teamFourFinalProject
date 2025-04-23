@@ -18,8 +18,8 @@ namespace teamFourFinalProject
 
                 if (keyData.keyID != "key0")
                 {
+                    DataPersistenceManager.instance.SaveGame();
                     Debug.Log("Returning to Hub");
-
                     UnityEngine.SceneManagement.SceneManager.LoadScene("Hub");
                 }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using teamFourFinalProject;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -33,6 +34,13 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
+
+        if (KeyManager.instance != null)
+        {
+            KeyManager.instance.ResetKeys();
+        }
+
+        SaveGame();
     }
 
     public void LoadGame()
@@ -40,7 +48,7 @@ public class DataPersistenceManager : MonoBehaviour
         //Load saved data from a file using the data handler
         this.gameData = dataHandler.Load();
 
-        //If not data can be loaded, initialize new game
+        //If no data can be loaded, initialize new game
         if (this.gameData == null)
         {
             Debug.Log("No data was found. Initialzing data to defaults");
@@ -80,5 +88,10 @@ public class DataPersistenceManager : MonoBehaviour
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
 
         return new List<IDataPersistence>(dataPersistenceObjects);
+    }
+
+    public void DeleteSavedGame()
+    {
+        dataHandler.DeleteSaveFile();
     }
 }

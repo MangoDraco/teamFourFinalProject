@@ -249,7 +249,7 @@ namespace teamFourFinalProject
 
         private void Update()
         {
-            Debug.Log("Camera forward: " + Camera.main.transform.forward);
+            //Debug.Log("Camera forward: " + Camera.main.transform.forward);
 
             movement = new Vector3(input.Direction.x, y: 0f, z: input.Direction.y);
 

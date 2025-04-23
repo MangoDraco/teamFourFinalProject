@@ -40,6 +40,12 @@ namespace teamFourFinalProject
             return collectedKeys.Contains(keyID);
         }
 
+        public void ResetKeys()
+        {
+            collectedKeys.Clear();
+            Debug.Log("KeyManager reset - keys cleared");
+        }
+
         public void SaveData(ref GameData data)
         {
             data.keysCollected.Clear();
