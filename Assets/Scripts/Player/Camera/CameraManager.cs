@@ -19,11 +19,11 @@ namespace teamFourFinalProject
         bool isRMBPressed;
         bool cameraMovementLock;
 
-        IEnumerator Start()
+        void Start()
         {
-            yield return null;
+            //yield return null;
 
-            FixMainCameraTag();
+            //FixMainCameraTag();
 
             Debug.Log("Main camera is: " + Camera.main.name);
         }
