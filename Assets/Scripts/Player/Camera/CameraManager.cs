@@ -19,6 +19,15 @@ namespace teamFourFinalProject
         bool isRMBPressed;
         bool cameraMovementLock;
 
+        IEnumerator Start()
+        {
+            yield return null;
+
+            FixMainCameraTag();
+
+            Debug.Log("Main camera is: " + Camera.main.name);
+        }
+
         void OnEnable()
         {
             input.Look += OnLook;
@@ -76,6 +85,27 @@ namespace teamFourFinalProject
             cameraMovementLock = true;
             yield return new WaitForEndOfFrame();
             cameraMovementLock = false;
+        }
+
+        void FixMainCameraTag()
+        {
+            Camera[] allCameras = Camera.allCameras;
+
+            foreach (Camera cam in allCameras)
+            {
+                if (cam.CompareTag("MainCamera"))
+                {
+                    Debug.Log("Untaggin camera: " + cam.name);
+                    cam.tag = "Untagged";
+                }
+            }
+
+            Camera gameplayCam = GetComponent<Camera>();
+            if (gameplayCam != null)
+            {
+                gameplayCam.tag = "MainCamera";
+                Debug.Log("Assigned MainCamera tag to: " +gameplayCam.name);
+            }
         }
     }
 }
