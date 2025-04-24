@@ -14484,6 +14484,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 100064210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1139879214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5775929544729540885, guid: 68247ccd271e59f43ad92b2e211f93aa, type: 3}
+  m_PrefabInstance: {fileID: 8833615208790277356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1141167058
 GameObject:
   m_ObjectHideFlags: 0
@@ -24793,6 +24804,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1755135828}
+    - target: {fileID: 5824425293744602318, guid: 68247ccd271e59f43ad92b2e211f93aa, type: 3}
+      propertyPath: firstSelectedButton
+      value: 
+      objectReference: {fileID: 1139879214}
     - target: {fileID: 5963186915585789204, guid: 68247ccd271e59f43ad92b2e211f93aa, type: 3}
       propertyPath: playerHealth
       value: 

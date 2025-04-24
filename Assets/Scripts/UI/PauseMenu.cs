@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public static bool GameIsPaused = false;
+    public Button firstSelectedButton;
 
     void Update()
     {
@@ -30,6 +33,9 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstSelectedButton.gameObject);
     }
 
     public void Resume()
