@@ -20,5 +20,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   despawnTimer: 15
+  throwCooldown: 0.5
   spawnDistance: 8
   cardVal: 0

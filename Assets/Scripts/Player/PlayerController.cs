@@ -143,6 +143,10 @@ namespace teamFourFinalProject
             {
                 if (currentActivePowerup != null)
                 {
+                    if (currentActivePowerup is CardPowerup cardPowerup)
+                    {
+                        cardPowerup.HideGhostPreview();
+                    }
                     currentActivePowerup.RemoveEffects(this);
                     Debug.Log("Powerup ended");
                     currentActivePowerup = null;
@@ -215,7 +219,7 @@ namespace teamFourFinalProject
                 if (!throwCooldownTimer.isRunning)
                 {
                     cardPowerup.ThrowPlatform(this);
-                    throwCooldownTimer.Reset(2f);
+                    throwCooldownTimer.Reset(cardPowerup.throwCooldown);
                     throwCooldownTimer.Start();
                 }
 

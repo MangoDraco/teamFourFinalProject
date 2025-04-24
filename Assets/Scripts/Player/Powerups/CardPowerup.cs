@@ -17,6 +17,7 @@ namespace teamFourFinalProject
         public LayerMask wallLayerMask;
 
         public float despawnTimer = 5.0f;
+        public float throwCooldown = 0.5f;
         public float spawnDistance = 3f;
         public int cardVal = 0;
 
@@ -104,6 +105,7 @@ namespace teamFourFinalProject
 
                 // Move the spawn position further away based on the spawnDistance
                 Vector3 spawnPos = player.transform.position + flatForward * spawnDistance;
+                spawnPos.y -= 0.5f;
 
                 Quaternion spawnRot = Quaternion.LookRotation(flatForward);
 
@@ -139,6 +141,7 @@ namespace teamFourFinalProject
                 flatForward.Normalize();
 
                 ghostPos = player.transform.position + flatForward * spawnDistance;
+                ghostPos.y -= 0.5f;
                 ghostRot = Quaternion.LookRotation(flatForward);
             }
 
