@@ -105,7 +105,7 @@ namespace teamFourFinalProject
 
                 // Move the spawn position further away based on the spawnDistance
                 Vector3 spawnPos = player.transform.position + flatForward * spawnDistance;
-                spawnPos.y -= 0.5f;
+                spawnPos.y -= 0.5f; //Adjusts platform position!
 
                 Quaternion spawnRot = Quaternion.LookRotation(flatForward);
 
@@ -141,7 +141,7 @@ namespace teamFourFinalProject
                 flatForward.Normalize();
 
                 ghostPos = player.transform.position + flatForward * spawnDistance;
-                ghostPos.y -= 0.5f;
+                ghostPos.y -= 0.5f; //Adjusts ghost platform position!
                 ghostRot = Quaternion.LookRotation(flatForward);
             }
 
