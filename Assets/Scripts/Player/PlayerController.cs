@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using DG.Tweening;
 using KBCore.Refs;
 
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
@@ -64,7 +65,6 @@ namespace teamFourFinalProject
         [SerializeField] float controllerSmoothTime = 0.2f; //lower = snappier, higher = smoother
         private Vector2 controllerLookVelocity;
         private Vector2 currentControllerLook;
-
 
         //If making a different way to attack
         /*[Header("Attack Settings")]
