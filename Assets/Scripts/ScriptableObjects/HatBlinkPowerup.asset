@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891602e815f21ce45a165999c9d082d2, type: 3}
   m_Name: HatBlinkPowerup
   m_EditorClassIdentifier: 
-  duration: 300
+  duration: 30

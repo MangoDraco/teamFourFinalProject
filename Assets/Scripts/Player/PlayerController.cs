@@ -11,8 +11,6 @@ using UnityEngine.Audio;
 
 namespace teamFourFinalProject
 {
-
-
     public class PlayerController : ValidatedMonoBehaviour
     {
         [Header("References")]

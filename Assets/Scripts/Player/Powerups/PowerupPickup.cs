@@ -13,7 +13,17 @@ namespace teamFourFinalProject
             if (other.TryGetComponent(out PlayerController player))
             {
                 player.PickupPowerup(powerup);
-                Destroy(gameObject);
+                
+                var respawner = GetComponent<PowerupRespawner>();
+                if (respawner != null)
+                {
+                    respawner.OnPickedUp();
+                }
+
+                else
+                {
+                    //Destroy(gameObject);
+                }
             }
         }
     }
